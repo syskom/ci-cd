@@ -38,10 +38,35 @@ No output parameters.
 * [Checkout Action][action-action-checkout-url]
 * [Reviewdog Actionlint Action][action-reviewdog-actionlint-url]
 
+### [gradle-check.yaml](.github/workflows/gradle-check.yaml)
+
+Workflow that runs Gradle `run` task. It uses action.
+
+#### Input parameters
+
+| Name              | Description                                                                                    | Required | Default | Type   |
+|-------------------|------------------------------------------------------------------------------------------------|----------|---------|--------|
+| java-distribution | Which Java distribution to use - https://github.com/actions/setup-java#supported-distributions | false    | temurin | string |
+| java-version      | Which Java version to use - https://github.com/actions/setup-java#supported-version-syntax     | false    | 21      | string |
+
+#### Output parameters
+
+No output parameters.
+
+#### Used Actions
+
+* [Checkout Action][action-action-checkout-url]
+* [Setup Java Action][action-action-setup_java-url]
+* [Setup Gradle Action][action-gradle-setup_gradle-url]
+
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [action-action-checkout-url]: https://github.com/actions/checkout
+
+[action-action-setup_java-url]: https://github.com/actions/setup-java
+
+[action-gradle-setup_gradle-url]: https://github.com/gradle/actions/blob/main/docs/setup-gradle.md
 
 [action-reviewdog-actionlint-url]: https://github.com/reviewdog/action-actionlint
 
