@@ -1,0 +1,37 @@
+name: GitHub Workflows Check
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/**"
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+  workflow_call: ~
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  github-actions-check:
+    name: Check GitHub Workflows YAML files
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+      - name: Lint GitHub Workflows YAML files
+        uses: reviewdog/action-actionlint@9d8b58041eed1373f173e91b9a3db5a844197236 # v1.44.0
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          fail_on_error: true
+          filter_mode: file
+          level: error
+          reporter: github-pr-check
