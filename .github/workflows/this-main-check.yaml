@@ -1,0 +1,22 @@
+name: Main Branch Checks
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch: ~
+
+jobs:
+  github-actions-check:
+    name: Check GitHub Workflows YAML files
+    permissions:
+      checks: write
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: syskom/ci-cd/.github/actions/workflows-check@main
+        with:
+          filter-mode: nofilter
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: github-check
