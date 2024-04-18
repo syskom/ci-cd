@@ -14,8 +14,8 @@ on:
   workflow_call: ~
 
 permissions:
+  checks: write
   contents: read
-  # required by reviewdog/action-actionlint to add PR comments
   pull-requests: write
 
 jobs:

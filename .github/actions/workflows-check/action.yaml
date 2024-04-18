@@ -1,0 +1,24 @@
+name: GitHub Workflows Check Action
+description: Runs actionlint tool to check GitHub Workflows YAML files
+
+inputs:
+  github-token:
+    description: GitHub token, can be read from `secrets.GITHUB_TOKEN`
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+    - name: Lint GitHub Workflows YAML files
+      uses: reviewdog/action-actionlint@9d8b58041eed1373f173e91b9a3db5a844197236 # v1.44.0
+      env:
+        REVIEWDOG_GITHUB_API_TOKEN: ${{ inputs.github-token }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+      with:
+        fail_on_error: true
+        filter_mode: file
+        level: error
+        reporter: github-pr-check
