@@ -2,12 +2,12 @@ on:
   workflow_call:
     inputs:
       java-distribution:
-        description: Which Java distribution to use - https://github.com/actions/setup-java#supported-distributions
+        description: Which Java distribution to use – https://github.com/actions/setup-java#supported-distributions
         required: false
         default: temurin
         type: string
       java-version:
-        description: Which Java version to use - https://github.com/actions/setup-java#supported-version-syntax
+        description: Which Java version to use – https://github.com/actions/setup-java#supported-version-syntax
         required: false
         default: 21
         type: string

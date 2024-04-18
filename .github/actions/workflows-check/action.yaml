@@ -2,9 +2,17 @@ name: GitHub Workflows Check Action
 description: Runs actionlint tool to check GitHub Workflows YAML files
 
 inputs:
+  filter-mode:
+    description: Filter mode used by Reviewdog to filter results – https://github.com/reviewdog/reviewdog#filter-mode
+    required: false
+    default: file
   github-token:
     description: GitHub token, can be read from `secrets.GITHUB_TOKEN`
     required: true
+  reporter:
+    description: Reporter used by Reviewdog to report results – https://github.com/reviewdog/reviewdog#reporters
+    required: false
+    default: github-pr-check
 
 runs:
   using: composite
@@ -19,6 +27,6 @@ runs:
         GITHUB_TOKEN: ${{ inputs.github-token }}
       with:
         fail_on_error: true
-        filter_mode: file
+        filter_mode: ${{ inputs.filter-mode }}
         level: error
-        reporter: github-pr-check
+        reporter: ${{ inputs.reporter }}
