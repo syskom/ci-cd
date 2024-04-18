@@ -3,11 +3,17 @@
 *** Markdown "reference style" links for readability.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![MIT License][license-shield]][license-url]
-[![Issues][issues-shield]][issues-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+
+[![MIT License][badge-license-shield]][license-url]
+[![GitHub Workflow Status][badge-build-shield]][badge-build-url]
+[![Maintained][badge-maintained-shield]][badge-maintained-url]
+[![GitHub latest commit][badge-last-commit-shield]][badge-last-commit-url]
+[![Issues][badge-issues-shield]][badge-issues-url]
+[![Pull requests][badge-pr-shield]][badge-pr-url]
+[![Hits-of-Code][badge-hits_of_code-shield]][badge-hits_of_code-url]
+[![Forks][badge-forks-shield]][badge-forks-url]
+[![Stargazers][badge-stars-shield]][badge-stars-url]
+[![LinkedIn][badge-linkedin-shield]][linkedin-url]
 
 <!-- PROJECT DESCRIPTION -->
 
@@ -133,9 +139,41 @@ If no errors will be found, `Branch protection job` will be executed with succes
 
 [action-reviewdog-actionlint-url]: https://github.com/reviewdog/action-actionlint
 
-[forks-shield]: https://img.shields.io/github/forks/syskom/ci-cd.svg
+[badge-build-shield]: https://img.shields.io/github/actions/workflow/status/syskom/ci-cd/this-main-check.yaml?branch=main
 
-[forks-url]: https://github.com/syskom/ci-cd/network/members
+[badge-build-url]: https://github.com/syskom/ci-cd/actions/workflows/this-main-check.yaml
+
+[badge-forks-shield]: https://img.shields.io/github/forks/syskom/ci-cd.svg
+
+[badge-forks-url]: https://github.com/syskom/ci-cd/network/members
+
+[badge-hits_of_code-shield]: https://hitsofcode.com/github/syskom/ci-cd?branch=main&label=Hits-of-Code
+
+[badge-hits_of_code-url]: https://hitsofcode.com/github/syskom/ci-cd/view?branch=main&label=Hits-of-Code
+
+[badge-issues-shield]: https://img.shields.io/github/issues/syskom/ci-cd.svg
+
+[badge-issues-url]: https://github.com/syskom/ci-cd/issues
+
+[badge-last-commit-shield]: https://badgen.net/github/last-commit/syskom/ci-cd
+
+[badge-last-commit-url]: https://GitHub.com/syskom/ci-cd/commit/
+
+[badge-license-shield]: https://img.shields.io/github/license/syskom/ci-cd.svg
+
+[badge-linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?logo=linkedin&colorB=555
+
+[badge-maintained-shield]: https://img.shields.io/badge/maintained%3F-yes-green.svg
+
+[badge-maintained-url]: https://github.com/syskom/ci-cd/graphs/commit-activity
+
+[badge-pr-shield]: https://img.shields.io/github/issues-pr/syskom/ci-cd.svg 
+
+[badge-pr-url]: https://GitHub.com/syskom/ci-cd/pull
+
+[badge-stars-shield]: https://img.shields.io/github/stars/syskom/ci-cd.svg
+
+[badge-stars-url]: https://github.com/syskom/ci-cd/stargazers
 
 [github-composite-actions-url]: https://docs.github.com/en/actions/creating-actions/creating-a-composite-action
 
@@ -143,20 +181,9 @@ If no errors will be found, `Branch protection job` will be executed with succes
 
 [github-reusable-workflows-url]: https://docs.github.com/en/actions/using-workflows/reusing-workflows
 
-[issues-shield]: https://img.shields.io/github/issues/syskom/ci-cd.svg
-
-[issues-url]: https://github.com/syskom/ci-cd/issues
-
-[license-shield]: https://img.shields.io/github/license/syskom/ci-cd.svg
-
 [license-url]: https://github.com/syskom/ci-cd/blob/main/LICENSE
-
-[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?logo=linkedin&colorB=555
 
 [linkedin-url]: https://linkedin.com/in/marcin-k-dabrowski
 
-[stars-shield]: https://img.shields.io/github/stars/syskom/ci-cd.svg
-
-[stars-url]: https://github.com/syskom/ci-cd/stargazers
-
 [syskom-org-url]: https://github.com/syskom
+
