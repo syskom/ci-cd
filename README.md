@@ -10,7 +10,6 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 <!-- PROJECT DESCRIPTION -->
-
 # Continuous Integration and Continuous Delivery (CI/CD) pipelines and tools
 
 This repository contains a continuous integration and continuous delivery (CI/CD) workflows used by all other
@@ -23,7 +22,7 @@ in [.github/actions](.github/actions) directory.
 
 ### [workflows-check](.github/actions/workflows-check)
 
-Workflow that validates if GitHub workflow YAML file is valid.
+Action that validates if GitHub Workflow YAML files located in `.github/workflows` folder are valid.
 
 #### Permissions
 
@@ -55,25 +54,6 @@ No output parameters.
 [GitHub Reusable Workflows][github-reusable-workflows-url] are located
 in [.github/workflows](.github/workflows) directory.
 
-### [actions-check.yaml](.github/workflows/actions-check.yaml)
-
-Workflow that validates if workflow file is valid.
-
-It is also used as a required workflow for PRs with workflows for this repository.
-
-#### Input parameters
-
-No input parameters.
-
-#### Output parameters
-
-No output parameters.
-
-#### Used Actions
-
-* [Checkout Action][action-action-checkout-url]
-* [Reviewdog Actionlint Action][action-reviewdog-actionlint-url]
-
 ### [gradle-check.yaml](.github/workflows/gradle-check.yaml)
 
 Workflow that runs Gradle `run` task. It uses action.
@@ -95,12 +75,34 @@ No output parameters.
 * [Setup Java Action][action-action-setup_java-url]
 * [Setup Gradle Action][action-gradle-setup_gradle-url]
 
+## Repository GitHub Workflows
+
+### [this-pr-check.yaml](.github/workflows/this-pr-check.yaml)
+
+Workflow that runs all checks against Pull Request to this repository.
+
+#### Trigger condition
+
+A pull request to `main` branch after pull request was created (`opened`), commits where pushed to the pull
+request (`synchronized`) or closed pull request was reopened (`reopened`).
+
+#### Execution result
+
+If no errors will be found `Branch protection job` will be executed with success.
+
+#### Used Actions
+
+* [Paths Changes Filter Action][action-dorny-paths_filter-url] – checks what part of the repository was changed.
+* [GitHub Workflows Check Action](#workflows-check) – will be run only for changes in `.github/workflows/` folder.
+
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [action-action-checkout-url]: https://github.com/actions/checkout
 
 [action-action-setup_java-url]: https://github.com/actions/setup-java
+
+[action-dorny-paths_filter-url]: https://github.com/dorny/paths-filter
 
 [action-gradle-setup_gradle-url]: https://github.com/gradle/actions/blob/main/docs/setup-gradle.md
 
