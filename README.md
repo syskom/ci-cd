@@ -30,13 +30,13 @@ the [MIT License][license-url].
 [GitHub Composite Actions][github-composite-actions-url] are located
 in [.github/actions](.github/actions) directory.
 
-### [workflows-check](.github/actions/workflows-check)
+### [GitHub Workflows Check Action – workflows-check](.github/actions/workflows-check)
 
 Action that validates GitHub Workflow YAML files located in `.github/workflows` folder.
 
 #### Permissions
 
-[Permissions][github-job-permissions] required by job calling the action:
+[Permissions][github-job-permissions] required by job calling this action:
 
 | Scope         | Value | Description                              |
 |---------------|-------|------------------------------------------|
@@ -89,7 +89,7 @@ The Workflow do not have output parameters.
 
 ## Repository GitHub Workflows
 
-### [this-main-check.yaml](.github/workflows/this-main-check.yaml)
+### [Continuous Integration Build](.github/workflows/ci-main.yaml)
 
 Workflow that runs all checks on `main` branch.
 
@@ -105,17 +105,19 @@ Info about found errors.
 
 #### Used Actions
 
-* [GitHub Workflows Check Action](#workflows-check) – run only for YAML files with GitHub Workflows definition
-  in `.github/workflows/` folder.
+* [GitHub Workflows Check Action](#github-workflows-check-action--workflows-check) – check only YAML files with GitHub
+  Workflows definition located in `.github/workflows/` folder.
 
-### [this-pr-check.yaml](.github/workflows/this-pr-check.yaml)
+### [Continuous Integration Checks](.github/workflows/ci-pr.yaml)
 
 Workflow that runs all checks on the Pull Request created in this repository.
 
 #### Trigger condition
 
-A pull request to `main` branch after pull request was created (`opened`), commits where pushed to the pull
-request (`synchronized`) or closed pull request was reopened (`reopened`).
+On pull request to `main` branch, after:
+* pull request was created (`opened`),
+* commits where pushed to the pull request (`synchronized`),
+* previously closed pull request was reopened (`reopened`).
 
 #### Execution result
 
@@ -124,7 +126,8 @@ If no errors will be found, `Branch protection job` will be executed with succes
 #### Used Actions
 
 * [Paths Changes Filter Action][action-dorny-paths_filter-url] – checks what part of the repository was changed.
-* [GitHub Workflows Check Action](#workflows-check) – is run only for changes in `.github/workflows/` folder.
+* [GitHub Workflows Check Action](#github-workflows-check-action--workflows-check) – run only when YAML files
+  in `.github/workflows/` folder where changed.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
@@ -139,9 +142,9 @@ If no errors will be found, `Branch protection job` will be executed with succes
 
 [action-reviewdog-actionlint-url]: https://github.com/reviewdog/action-actionlint
 
-[badge-build-shield]: https://img.shields.io/github/actions/workflow/status/syskom/ci-cd/this-main-check.yaml?branch=main
+[badge-build-shield]: https://img.shields.io/github/actions/workflow/status/syskom/ci-cd/ci-main.yaml?branch=main
 
-[badge-build-url]: https://github.com/syskom/ci-cd/actions/workflows/this-main-check.yaml
+[badge-build-url]: https://github.com/syskom/ci-cd/actions/workflows/ci-main.yaml
 
 [badge-forks-shield]: https://img.shields.io/github/forks/syskom/ci-cd.svg
 
@@ -167,7 +170,7 @@ If no errors will be found, `Branch protection job` will be executed with succes
 
 [badge-maintained-url]: https://github.com/syskom/ci-cd/graphs/commit-activity
 
-[badge-pr-shield]: https://img.shields.io/github/issues-pr/syskom/ci-cd.svg 
+[badge-pr-shield]: https://img.shields.io/github/issues-pr/syskom/ci-cd.svg
 
 [badge-pr-url]: https://GitHub.com/syskom/ci-cd/pull
 
