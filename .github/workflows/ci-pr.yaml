@@ -1,4 +1,4 @@
-name: Pull Request Checks
+name: Continuous Integration Checks
 
 on:
   pull_request:
@@ -25,7 +25,8 @@ jobs:
         with:
           filters: |
             github-workflows:
-              - '.github/workflows/**'
+              - ".github/workflows/*.yaml"
+              - ".github/workflows/*.yml"
 
   github-actions-check:
     name: Check GitHub Workflows YAML files
@@ -52,4 +53,4 @@ jobs:
     steps:
       - name: Branch protection rule
         run: |
-          echo 'All needed jobs were successfully executed.'
+          echo "All needed jobs were successfully executed."
