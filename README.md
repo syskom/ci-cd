@@ -157,6 +157,7 @@ Info about found errors.
 
 #### Used Actions
 
+* [EditorConfig Check Action](#editorconfig-check-action--editorconfig-check) – check `.editorconfig` file.
 * [GitHub Workflows Check Action](#github-workflows-check-action--workflows-check) – check only YAML files with GitHub
   Workflows definition located in `.github/workflows/` folder.
 * [Renovate Config Check Action](#renovate-config-check-action--renovate-config-check) – check `.github/renovate.json5`
@@ -180,6 +181,8 @@ If no errors will be found, `Branch protection job` will be executed with succes
 
 #### Used Actions
 
+* [EditorConfig Check Action](#editorconfig-check-action--editorconfig-check) – runs only
+  when `.editorconfig` file was changed.
 * [GitHub Workflows Check Action](#github-workflows-check-action--workflows-check) – runs only when YAML files
   in `.github/workflows/` folder where changed.
 * [Paths Changes Filter Action][action-dorny-paths_filter-url] – checks what part of the repository was changed.
