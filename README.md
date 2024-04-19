@@ -20,7 +20,7 @@
 # Continuous Integration and Continuous Delivery (CI/CD) pipelines and tools
 
 This repository contains a continuous integration and continuous delivery (CI/CD) workflows used by all other
-repositories in [Syskom][syskom-org-url] organization.
+repositories in the [Syskom][syskom-org-url] organization.
 
 Those workflows can be used by other organizations, but without any warranty as stated in
 the [MIT License][license-url].
@@ -29,6 +29,28 @@ the [MIT License][license-url].
 
 [GitHub Composite Actions][github-composite-actions-url] are located
 in [.github/actions](.github/actions) directory.
+
+### [Renovate Config Check Action – renovate-config-check](.github/actions/renovate-config-check)
+
+Runs `renovate-config-validator` tool to check Renovate config file.
+
+#### Permissions
+
+[Permissions][github-job-permissions] required by job calling this action:
+
+| Scope    | Value | Description |
+|----------|-------|-------------|
+| contents | read  |             |
+
+#### Input parameters
+
+| Id               | Description                                                                                                                   | Required | Default                |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------|----------|------------------------|
+| config-file-path | Path to the Renovate config file – https://docs.renovatebot.com/getting-started/installing-onboarding/#configuration-location | false    | .github/renovate.json5 |
+
+#### Output parameters
+
+The Action do not have output parameters.
 
 ### [GitHub Workflows Check Action – workflows-check](.github/actions/workflows-check)
 
@@ -84,8 +106,8 @@ The Workflow do not have output parameters.
 #### Used Actions
 
 * [Checkout Action][action-action-checkout-url]
-* [Setup Java Action][action-action-setup_java-url]
 * [Setup Gradle Action][action-gradle-setup_gradle-url]
+* [Setup Java Action][action-action-setup_java-url]
 
 ## Repository GitHub Workflows
 
@@ -115,6 +137,7 @@ Workflow that runs all checks on the Pull Request created in this repository.
 #### Trigger condition
 
 On pull request to `main` branch, after:
+
 * pull request was created (`opened`),
 * commits where pushed to the pull request (`synchronized`),
 * previously closed pull request was reopened (`reopened`).
@@ -125,9 +148,9 @@ If no errors will be found, `Branch protection job` will be executed with succes
 
 #### Used Actions
 
-* [Paths Changes Filter Action][action-dorny-paths_filter-url] – checks what part of the repository was changed.
 * [GitHub Workflows Check Action](#github-workflows-check-action--workflows-check) – run only when YAML files
   in `.github/workflows/` folder where changed.
+* [Paths Changes Filter Action][action-dorny-paths_filter-url] – checks what part of the repository was changed.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

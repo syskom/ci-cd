@@ -1,0 +1,19 @@
+name: Renovate Config Check Action
+description: Runs renovate-config-validator tool to check Renovate config file
+
+inputs:
+  config-file-path:
+    description: Path to the Renovate config file – https://docs.renovatebot.com/getting-started/installing-onboarding/#configuration-location
+    required: false
+    default: .github/renovate.json5
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
+
+    - name: Validate Renovate Config file
+      uses: suzuki-shunsuke/github-action-renovate-config-validator@b15c8642fe285e045b110738f238766ae584e63a
+      with:
+        config_file_path: ${{ inputs.config-file-path }}
