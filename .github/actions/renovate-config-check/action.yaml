@@ -13,7 +13,7 @@ runs:
     - name: Checkout code
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
-    - name: Validate Renovate Config file
+    - name: Check Renovate Config file
       uses: suzuki-shunsuke/github-action-renovate-config-validator@main
       with:
         config_file_path: ${{ inputs.config-file-path }}

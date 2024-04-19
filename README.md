@@ -25,6 +25,35 @@ repositories in the [Syskom][syskom-org-url] organization.
 Those workflows can be used by other organizations, but without any warranty as stated in
 the [MIT License][license-url].
 
+### [EditorConfig Check Action – editorconfig-check](.github/actions/editorconfig-check)
+
+Action that validates [EditorConfig](https://editorconfig.org/) file.
+
+#### Permissions
+
+[Permissions][github-job-permissions] required by job calling this action:
+
+| Scope    | Value | Description |
+|----------|-------|-------------|
+| contents | read  |             |
+| statuses | write |             |
+
+#### Input parameters
+
+| Id               | Description                                               | Required | Default       |
+|------------------|-----------------------------------------------------------|----------|---------------|
+| config-file-path | Path to the EditorConfig file – https://editorconfig.org/ | false    | .editorconfig |
+| github-token     | GitHub token, can be read from `secrets.GITHUB_TOKEN`     | true     | none          |
+
+#### Output parameters
+
+The Action do not have output parameters.
+
+#### Used Actions
+
+* [Checkout Action][action-action-checkout-url]
+* [Super-Linter Action][action-super_linter-super_linter-url]
+
 ## GitHub Composite Actions
 
 [GitHub Composite Actions][github-composite-actions-url] are located
@@ -32,7 +61,7 @@ in [.github/actions](.github/actions) directory.
 
 ### [Renovate Config Check Action – renovate-config-check](.github/actions/renovate-config-check)
 
-Runs `renovate-config-validator` tool to check Renovate config file.
+Runs `renovate-config-validator` tool to check [Renovate](https://docs.renovatebot.com/) config file.
 
 #### Permissions
 
@@ -54,7 +83,8 @@ The Action do not have output parameters.
 
 ### [GitHub Workflows Check Action – workflows-check](.github/actions/workflows-check)
 
-Action that validates GitHub Workflow YAML files located in `.github/workflows` folder.
+Action that validates [GitHub Workflow](https://docs.github.com/en/actions/using-workflows) YAML files located
+in `.github/workflows` folder.
 
 #### Permissions
 
@@ -169,9 +199,11 @@ If no errors will be found, `Branch protection job` will be executed with succes
 
 [action-reviewdog-actionlint-url]: https://github.com/reviewdog/action-actionlint
 
+[action-super_linter-super_linter-url]: https://github.com/super-linter/super-linter
+
 [badge-build-shield]: https://img.shields.io/github/actions/workflow/status/syskom/ci-cd/ci-main.yaml?branch=main
 
-[badge-build-url]: https://github.com/syskom/ci-cd/actions/workflows/ci-main.yaml
+[badge-build-url]: https://github.com/syskom/ci-cd/actions/workflows/ci-main.yaml?query=branch%3Amain+event%3Apush
 
 [badge-forks-shield]: https://img.shields.io/github/forks/syskom/ci-cd.svg
 
