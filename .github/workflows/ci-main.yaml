@@ -8,6 +8,17 @@ on:
   workflow_dispatch: ~
 
 jobs:
+  editorconfig-check:
+    name: Check EditorConfig file
+    permissions:
+      contents: read
+      statuses: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: syskom/ci-cd/.github/actions/editorconfig-check@main
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
   github-actions-check:
     name: Check GitHub Workflows YAML files
     permissions:
