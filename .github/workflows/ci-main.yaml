@@ -20,3 +20,11 @@ jobs:
           filter-mode: nofilter
           github-token: ${{ secrets.GITHUB_TOKEN }}
           reporter: github-check
+
+  renovate-config-check:
+    name: Check Renovate Config file
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: syskom/ci-cd/.github/actions/renovate-config-check@main

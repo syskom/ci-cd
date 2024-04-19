@@ -14,6 +14,6 @@ runs:
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
     - name: Validate Renovate Config file
-      uses: suzuki-shunsuke/github-action-renovate-config-validator@b15c8642fe285e045b110738f238766ae584e63a
+      uses: suzuki-shunsuke/github-action-renovate-config-validator@main
       with:
         config_file_path: ${{ inputs.config-file-path }}

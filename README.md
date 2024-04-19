@@ -60,11 +60,11 @@ Action that validates GitHub Workflow YAML files located in `.github/workflows` 
 
 [Permissions][github-job-permissions] required by job calling this action:
 
-| Scope         | Value | Description                              |
-|---------------|-------|------------------------------------------|
-| checks        | write |                                          |
-| contents      | read  |                                          |
-| pull-requests | write | Needed only when run on the pull request |
+| Scope         | Value | Description                               |
+|---------------|-------|-------------------------------------------|
+| checks        | write |                                           |
+| contents      | read  |                                           |
+| pull-requests | write | Needed only when runs on the pull request |
 
 #### Input parameters
 
@@ -129,6 +129,8 @@ Info about found errors.
 
 * [GitHub Workflows Check Action](#github-workflows-check-action--workflows-check) – check only YAML files with GitHub
   Workflows definition located in `.github/workflows/` folder.
+* [Renovate Config Check Action](#renovate-config-check-action--renovate-config-check) – check `.github/renovate.json5`
+  file.
 
 ### [Continuous Integration Checks](.github/workflows/ci-pr.yaml)
 
@@ -148,9 +150,11 @@ If no errors will be found, `Branch protection job` will be executed with succes
 
 #### Used Actions
 
-* [GitHub Workflows Check Action](#github-workflows-check-action--workflows-check) – run only when YAML files
+* [GitHub Workflows Check Action](#github-workflows-check-action--workflows-check) – runs only when YAML files
   in `.github/workflows/` folder where changed.
 * [Paths Changes Filter Action][action-dorny-paths_filter-url] – checks what part of the repository was changed.
+* [Renovate Config Check Action](#renovate-config-check-action--renovate-config-check) – runs only
+  when `.github/renovate.json5` file was changed.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
