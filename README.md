@@ -27,7 +27,8 @@ the [MIT License][license-url].
 
 ### [EditorConfig Check Action – editorconfig-check](.github/actions/editorconfig-check)
 
-Action that validates [EditorConfig](https://editorconfig.org/) file.
+Action that Runs [editorconfig-checker](https://github.com/editorconfig-checker/editorconfig-checker) to verify that
+your files are in harmony with your [.editorconfig](https://editorconfig.org/) file.
 
 #### Permissions
 
@@ -36,14 +37,10 @@ Action that validates [EditorConfig](https://editorconfig.org/) file.
 | Scope    | Value | Description |
 |----------|-------|-------------|
 | contents | read  |             |
-| statuses | write |             |
 
 #### Input parameters
 
-| Id               | Description                                               | Required | Default       |
-|------------------|-----------------------------------------------------------|----------|---------------|
-| config-file-path | Path to the EditorConfig file – https://editorconfig.org/ | false    | .editorconfig |
-| github-token     | GitHub token, can be read from `secrets.GITHUB_TOKEN`     | true     | none          |
+The Action do not have input parameters.
 
 #### Output parameters
 
@@ -52,7 +49,7 @@ The Action do not have output parameters.
 #### Used Actions
 
 * [Checkout Action][action-action-checkout-url]
-* [Super-Linter Action][action-super_linter-super_linter-url]
+* [EditorConfig Action][action-editorconfig_checker-action_editorconfig_checker-url]
 
 ## GitHub Composite Actions
 
@@ -198,11 +195,11 @@ If no errors will be found, `Branch protection job` will be executed with succes
 
 [action-dorny-paths_filter-url]: https://github.com/dorny/paths-filter
 
+[action-editorconfig_checker-action_editorconfig_checker-url]: https://github.com/editorconfig-checker/action-editorconfig-checker
+
 [action-gradle-setup_gradle-url]: https://github.com/gradle/actions/blob/main/docs/setup-gradle.md
 
 [action-reviewdog-actionlint-url]: https://github.com/reviewdog/action-actionlint
-
-[action-super_linter-super_linter-url]: https://github.com/super-linter/super-linter
 
 [badge-build-shield]: https://img.shields.io/github/actions/workflow/status/syskom/ci-cd/ci-main.yaml?branch=main
 

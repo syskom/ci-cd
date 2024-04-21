@@ -1,14 +1,5 @@
 name: EditorConfig Check Action
-description: Runs Super-Linter tool to check EditorConfig file
-
-inputs:
-  config-file-path:
-    description: Path to the EditorConfig file – https://editorconfig.org/
-    required: false
-    default: .editorconfig
-  github-token:
-    description: GitHub token, can be read from `secrets.GITHUB_TOKEN`
-    required: true
+description: Runs editorconfig-checker to verify that your files are in harmony with your .editorconfig
 
 runs:
   using: composite
@@ -16,9 +7,9 @@ runs:
     - name: Checkout code
       uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 # v4.1.1
 
-    - name: Check EditorConfig file
-      uses: super-linter/super-linter@9d8128f17796a16326ceed5a607d5639a47feb82 # v6.4.0
-      env:
-        FILTER_REGEX_INCLUDE: ${{ inputs.config-file-path }}
-        GITHUB_TOKEN: ${{ inputs.github-token }}
-        VALIDATE_EDITORCONFIG: "true"
+    - name: Install editorconfig-checker
+      uses: editorconfig-checker/action-editorconfig-checker@main
+
+    - name: Run editorconfig-checker
+      shell: bash
+      run: editorconfig-checker
