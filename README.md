@@ -56,6 +56,35 @@ The Action do not have output parameters.
 * [Checkout Action][action-action-checkout-url]
 * [EditorConfig Action][action-editorconfig_checker-action_editorconfig_checker-url]
 
+### [GitHub Actions Check Action – github-actions-check](.github/actions/github-actions-check)
+
+Action that validates [GitHub Actions](https://docs.github.com/en/actions/quickstart) YAML files located
+in `.github/actions` folder.
+
+#### Permissions
+
+[Permissions][github-job-permissions] required by job calling this action:
+
+| Scope    | Value | Description |
+|----------|-------|-------------|
+| contents | read  |             |
+
+#### Input parameters
+
+| Id     | Description                                                                                                                                                                  | Required | Default                                                                                    |
+|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------|
+| file   | Path to the GitHub Action YAML file(s). Can accept a glob pattern (will validate all matched files). Can accept multiple files (or glob patterns) separated by ` \|` symbol. | false    | .github/actions/\*\*/\*.yaml \| .github/actions/**/*.yml                                   |
+| schema | JSON schema of GitHub Action                                                                                                                                                 | false    | https://github.com/SchemaStore/schemastore/blob/master/src/schemas/json/github-action.json |
+
+#### Output parameters
+
+The Action do not have output parameters.
+
+#### Used Actions
+
+* [Checkout Action][action-action-checkout-url]
+* [JSON Schema validator Action][action-schema-validator-url]
+
 ### [GitHub Workflows Check Action – github-workflows-check](.github/actions/github-workflows-check)
 
 Action that validates [GitHub Workflow](https://docs.github.com/en/actions/using-workflows) YAML files located
@@ -155,7 +184,8 @@ Info about found errors.
 #### Used Actions
 
 * [EditorConfig Check Action](#editorconfig-check-action--editorconfig-check) – check `.editorconfig` file.
-* [GitHub Workflows Check Action](#github-workflows-check-action--github-workflows-check) – check only YAML files with GitHub
+* [GitHub Workflows Check Action](#github-workflows-check-action--github-workflows-check) – check only YAML files with
+  GitHub
   Workflows definition located in `.github/workflows/` folder.
 * [Renovate Config Check Action](#renovate-config-check-action--renovate-config-check) – check `.github/renovate.json5`
   file.
@@ -200,6 +230,8 @@ If no errors will be found, `Branch protection job` will be executed with succes
 [action-gradle-setup_gradle-url]: https://github.com/gradle/actions/blob/main/docs/setup-gradle.md
 
 [action-reviewdog-actionlint-url]: https://github.com/reviewdog/action-actionlint
+
+[action-schema-validator-url]: https://github.com/cardinalby/schema-validator-action
 
 [badge-build-shield]: https://img.shields.io/github/actions/workflow/status/syskom/ci-cd/ci-main.yaml?branch=main
 
