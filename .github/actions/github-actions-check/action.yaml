@@ -1,0 +1,27 @@
+name: GitHub Workflows Check Action
+description: Runs actionlint tool to check GitHub Workflows YAML files
+
+inputs:
+  file:
+    description: Path to the GitHub Action YAML file(s). Can accept a glob pattern (will validate all matched files). Can accept multiple files (or glob patterns) separated by | symbol.
+    required: false
+    default: .github/actions/**/*.yaml|.github/actions/**/*.yml
+  schema:
+    description: JSON schema of GitHub Action
+    required: false
+    default: https://github.com/SchemaStore/schemastore/blob/master/src/schemas/json/github-action.json
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4.1.4
+
+    - name: Check GitHub Actions YAML files
+      uses: cardinalby/schema-validator-action@2166123eb256fa40baef7e22ab1379708425efc7 # v3.1.1
+      with:
+        file: ${{ inputs.file }}
+        fileParser: yaml
+        fixSchema: false
+        mode: strong
+        schema: ${{ inputs.schema }}
