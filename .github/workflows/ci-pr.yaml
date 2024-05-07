@@ -17,6 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     # Set job outputs to values from filter step
     outputs:
+      github-actions: ${{ steps.filter.outputs.github-actions }}
       github-workflows: ${{ steps.filter.outputs.github-workflows }}
       renovate-config: ${{ steps.filter.outputs.renovate-config }}
     steps:
@@ -25,6 +26,8 @@ jobs:
         id: filter
         with:
           filters: |
+            github-actions:
+              - ".github/actions/**/*.yaml"
             github-workflows:
               - ".github/workflows/*.yaml"
               - ".github/workflows/*.yml"
@@ -40,6 +43,16 @@ jobs:
       - uses: syskom/ci-cd/.github/actions/editorconfig-check@main
 
   github-actions-check:
+    name: Check GitHub Actions YAML files
+    needs: changes
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: syskom/ci-cd/.github/actions/github-actions-check@main
+        if: needs.changes.outputs.github-actions == 'true'
+
+  github-workflows-check:
     name: Check GitHub Workflows YAML files
     needs: changes
     permissions:
@@ -70,6 +83,7 @@ jobs:
     needs:
       - editorconfig-check
       - github-actions-check
+      - github-workflows-check
       - renovate-config-check
     steps:
       - name: Branch protection rule
