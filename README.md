@@ -71,10 +71,10 @@ in `.github/actions` folder.
 
 #### Input parameters
 
-| Id     | Description                                                                                                                                                                 | Required | Default                                                                                    |
-|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------|
-| file   | Path to the GitHub Action YAML file(s). Can accept a glob pattern (will validate all matched files). Can accept multiple files (or glob patterns) separated by `\|` symbol. | false    | .github/actions/\*\*/\*.yaml \| .github/actions/**/*.yml                                   |
-| schema | JSON schema of GitHub Action.                                                                                                                                               | false    | https://github.com/SchemaStore/schemastore/blob/master/src/schemas/json/github-action.json |
+| Id     | Description                                                                                                                                                                 | Required | Default                                                                                              |
+|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------|
+| file   | Path to the GitHub Action YAML file(s). Can accept a glob pattern (will validate all matched files). Can accept multiple files (or glob patterns) separated by `\|` symbol. | false    | .github/actions/\*\*/\*.yaml \| .github/actions/**/*.yml                                             |
+| schema | JSON schema of GitHub Action.                                                                                                                                               | false    | https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/github-action.json |
 
 #### Output parameters
 

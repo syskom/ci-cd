@@ -9,7 +9,7 @@ inputs:
   schema:
     description: JSON schema of GitHub Action
     required: false
-    default: https://github.com/SchemaStore/schemastore/blob/master/src/schemas/json/github-action.json
+    default: https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/github-action.json
 
 runs:
   using: composite
@@ -22,6 +22,6 @@ runs:
       with:
         file: ${{ inputs.file }}
         fileParser: yaml
-        fixSchema: false
-        mode: strong
+        fixSchemas: false
+        mode: default
         schema: ${{ inputs.schema }}
