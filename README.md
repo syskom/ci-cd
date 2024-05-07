@@ -71,10 +71,10 @@ in `.github/actions` folder.
 
 #### Input parameters
 
-| Id     | Description                                                                                                                                                                  | Required | Default                                                                                    |
-|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------|
-| file   | Path to the GitHub Action YAML file(s). Can accept a glob pattern (will validate all matched files). Can accept multiple files (or glob patterns) separated by ` \|` symbol. | false    | .github/actions/\*\*/\*.yaml \| .github/actions/**/*.yml                                   |
-| schema | JSON schema of GitHub Action                                                                                                                                                 | false    | https://github.com/SchemaStore/schemastore/blob/master/src/schemas/json/github-action.json |
+| Id     | Description                                                                                                                                                                 | Required | Default                                                                                    |
+|--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|--------------------------------------------------------------------------------------------|
+| file   | Path to the GitHub Action YAML file(s). Can accept a glob pattern (will validate all matched files). Can accept multiple files (or glob patterns) separated by `\|` symbol. | false    | .github/actions/\*\*/\*.yaml \| .github/actions/**/*.yml                                   |
+| schema | JSON schema of GitHub Action.                                                                                                                                               | false    | https://github.com/SchemaStore/schemastore/blob/master/src/schemas/json/github-action.json |
 
 #### Output parameters
 
@@ -102,11 +102,11 @@ in `.github/workflows` folder.
 
 #### Input parameters
 
-| Id           | Description                                                                                          | Required | Default         |
-|--------------|------------------------------------------------------------------------------------------------------|----------|-----------------|
-| filter-mode  | Filter mode used by Reviewdog to filter results – https://github.com/reviewdog/reviewdog#filter-mode | false    | file            |
-| github-token | GitHub token, can be read from `secrets.GITHUB_TOKEN`                                                | true     | none            |
-| reporter     | Reporter used by Reviewdog to report results – https://github.com/reviewdog/reviewdog#reporters      | false    | github-pr-check |
+| Id           | Description                                                                                           | Required | Default         |
+|--------------|-------------------------------------------------------------------------------------------------------|----------|-----------------|
+| filter-mode  | Filter mode used by Reviewdog to filter results – https://github.com/reviewdog/reviewdog#filter-mode. | false    | file            |
+| github-token | GitHub token, can be read from `secrets.GITHUB_TOKEN`.                                                | true     | none            |
+| reporter     | Reporter used by Reviewdog to report results – https://github.com/reviewdog/reviewdog#reporters.      | false    | github-pr-check |
 
 #### Output parameters
 
@@ -131,9 +131,9 @@ Runs `renovate-config-validator` tool to check [Renovate](https://docs.renovateb
 
 #### Input parameters
 
-| Id               | Description                                                                                                                   | Required | Default                |
-|------------------|-------------------------------------------------------------------------------------------------------------------------------|----------|------------------------|
-| config-file-path | Path to the Renovate config file – https://docs.renovatebot.com/getting-started/installing-onboarding/#configuration-location | false    | .github/renovate.json5 |
+| Id               | Description                                                                                                                    | Required | Default                |
+|------------------|--------------------------------------------------------------------------------------------------------------------------------|----------|------------------------|
+| config-file-path | Path to the Renovate config file – https://docs.renovatebot.com/getting-started/installing-onboarding/#configuration-location. | false    | .github/renovate.json5 |
 
 #### Output parameters
 
@@ -150,10 +150,10 @@ Workflow that runs Gradle `run` task. It uses action.
 
 #### Input parameters
 
-| Id                | Description                                                                                    | Required | Default | Type   |
-|-------------------|------------------------------------------------------------------------------------------------|----------|---------|--------|
-| java-distribution | Which Java distribution to use – https://github.com/actions/setup-java#supported-distributions | false    | temurin | string |
-| java-version      | Which Java version to use – https://github.com/actions/setup-java#supported-version-syntax     | false    | 21      | string |
+| Id                | Description                                                                                     | Required | Default | Type   |
+|-------------------|-------------------------------------------------------------------------------------------------|----------|---------|--------|
+| java-distribution | Which Java distribution to use – https://github.com/actions/setup-java#supported-distributions. | false    | temurin | string |
+| java-version      | Which Java version to use – https://github.com/actions/setup-java#supported-version-syntax.     | false    | 21      | string |
 
 #### Output parameters
 
@@ -184,9 +184,10 @@ Info about found errors.
 #### Used Actions
 
 * [EditorConfig Check Action](#editorconfig-check-action--editorconfig-check) – check `.editorconfig` file.
+* [GitHub Actions Check Action](#github-actions-check-action--github-actions-check) – check only YAML files with
+  GitHub Actions definition located in `.github/actions` folder.
 * [GitHub Workflows Check Action](#github-workflows-check-action--github-workflows-check) – check only YAML files with
-  GitHub
-  Workflows definition located in `.github/workflows/` folder.
+  GitHub Workflows definition located in `.github/workflows/` folder.
 * [Renovate Config Check Action](#renovate-config-check-action--renovate-config-check) – check `.github/renovate.json5`
   file.
 
@@ -210,8 +211,10 @@ If no errors will be found, `Branch protection job` will be executed with succes
 
 * [EditorConfig Check Action](#editorconfig-check-action--editorconfig-check) – runs only
   when `.editorconfig` file was changed.
+* [GitHub Actions Check Action](#github-actions-check-action--github-actions-check) – runs only when YAML files with
+  GitHub Actions definition located in `.github/actions` folder where changed.
 * [GitHub Workflows Check Action](#github-workflows-check-action--github-workflows-check) – runs only when YAML files
-  in `.github/workflows/` folder where changed.
+  with GitHub Workflows definition located in `.github/workflows` where changed.
 * [Paths Changes Filter Action][action-dorny-paths_filter-url] – checks what part of the repository was changed.
 * [Renovate Config Check Action](#renovate-config-check-action--renovate-config-check) – runs only
   when `.github/renovate.json5` file was changed.

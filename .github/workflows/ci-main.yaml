@@ -17,6 +17,14 @@ jobs:
       - uses: syskom/ci-cd/.github/actions/editorconfig-check@main
 
   github-actions-check:
+    name: Check GitHub Actions YAML files
+    permissions:
+      contents: read
+    runs-on: ubuntu-latest
+    steps:
+      - uses: syskom/ci-cd/.github/actions/github-actions-check@main
+
+  github-workflows-check:
     name: Check GitHub Workflows YAML files
     permissions:
       checks: write
