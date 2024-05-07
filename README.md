@@ -25,6 +25,11 @@ repositories in the [Syskom][syskom-org-url] organization.
 Those workflows can be used by other organizations, but without any warranty as stated in
 the [MIT License][license-url].
 
+## GitHub Composite Actions
+
+[GitHub Composite Actions][github-composite-actions-url] are located
+in [.github/actions](.github/actions) directory.
+
 ### [EditorConfig Check Action – editorconfig-check](.github/actions/editorconfig-check)
 
 Action that Runs [editorconfig-checker](https://github.com/editorconfig-checker/editorconfig-checker) to verify that
@@ -51,34 +56,7 @@ The Action do not have output parameters.
 * [Checkout Action][action-action-checkout-url]
 * [EditorConfig Action][action-editorconfig_checker-action_editorconfig_checker-url]
 
-## GitHub Composite Actions
-
-[GitHub Composite Actions][github-composite-actions-url] are located
-in [.github/actions](.github/actions) directory.
-
-### [Renovate Config Check Action – renovate-config-check](.github/actions/renovate-config-check)
-
-Runs `renovate-config-validator` tool to check [Renovate](https://docs.renovatebot.com/) config file.
-
-#### Permissions
-
-[Permissions][github-job-permissions] required by job calling this action:
-
-| Scope    | Value | Description |
-|----------|-------|-------------|
-| contents | read  |             |
-
-#### Input parameters
-
-| Id               | Description                                                                                                                   | Required | Default                |
-|------------------|-------------------------------------------------------------------------------------------------------------------------------|----------|------------------------|
-| config-file-path | Path to the Renovate config file – https://docs.renovatebot.com/getting-started/installing-onboarding/#configuration-location | false    | .github/renovate.json5 |
-
-#### Output parameters
-
-The Action do not have output parameters.
-
-### [GitHub Workflows Check Action – workflows-check](.github/actions/workflows-check)
+### [GitHub Workflows Check Action – github-workflows-check](.github/actions/github-workflows-check)
 
 Action that validates [GitHub Workflow](https://docs.github.com/en/actions/using-workflows) YAML files located
 in `.github/workflows` folder.
@@ -109,6 +87,28 @@ The Action do not have output parameters.
 
 * [Checkout Action][action-action-checkout-url]
 * [Reviewdog Actionlint Action][action-reviewdog-actionlint-url]
+
+### [Renovate Config Check Action – renovate-config-check](.github/actions/renovate-config-check)
+
+Runs `renovate-config-validator` tool to check [Renovate](https://docs.renovatebot.com/) config file.
+
+#### Permissions
+
+[Permissions][github-job-permissions] required by job calling this action:
+
+| Scope    | Value | Description |
+|----------|-------|-------------|
+| contents | read  |             |
+
+#### Input parameters
+
+| Id               | Description                                                                                                                   | Required | Default                |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------|----------|------------------------|
+| config-file-path | Path to the Renovate config file – https://docs.renovatebot.com/getting-started/installing-onboarding/#configuration-location | false    | .github/renovate.json5 |
+
+#### Output parameters
+
+The Action do not have output parameters.
 
 ## GitHub Reusable Workflows
 
@@ -155,7 +155,7 @@ Info about found errors.
 #### Used Actions
 
 * [EditorConfig Check Action](#editorconfig-check-action--editorconfig-check) – check `.editorconfig` file.
-* [GitHub Workflows Check Action](#github-workflows-check-action--workflows-check) – check only YAML files with GitHub
+* [GitHub Workflows Check Action](#github-workflows-check-action--github-workflows-check) – check only YAML files with GitHub
   Workflows definition located in `.github/workflows/` folder.
 * [Renovate Config Check Action](#renovate-config-check-action--renovate-config-check) – check `.github/renovate.json5`
   file.
@@ -180,7 +180,7 @@ If no errors will be found, `Branch protection job` will be executed with succes
 
 * [EditorConfig Check Action](#editorconfig-check-action--editorconfig-check) – runs only
   when `.editorconfig` file was changed.
-* [GitHub Workflows Check Action](#github-workflows-check-action--workflows-check) – runs only when YAML files
+* [GitHub Workflows Check Action](#github-workflows-check-action--github-workflows-check) – runs only when YAML files
   in `.github/workflows/` folder where changed.
 * [Paths Changes Filter Action][action-dorny-paths_filter-url] – checks what part of the repository was changed.
 * [Renovate Config Check Action](#renovate-config-check-action--renovate-config-check) – runs only
