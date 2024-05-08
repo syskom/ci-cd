@@ -83,7 +83,7 @@ The Action do not have output parameters.
 #### Used Actions
 
 * [Checkout Action][action-action-checkout-url]
-* [JSON Schema validator Action][action-schema-validator-url]
+* [JSON Schema validator Action][action-cardinalby-schema_validator-url]
 
 ### [GitHub Workflows Check Action – github-workflows-check](.github/actions/github-workflows-check)
 
@@ -209,6 +209,7 @@ If no errors will be found, `Branch protection job` will be executed with succes
 
 #### Used Actions
 
+* [Alls-green Action][action-re_actor-alls_green-url] – checks if all run checks succeeded.
 * [EditorConfig Check Action](#editorconfig-check-action--editorconfig-check) – runs only
   when `.editorconfig` file was changed.
 * [GitHub Actions Check Action](#github-actions-check-action--github-actions-check) – runs only when YAML files with
@@ -226,6 +227,8 @@ If no errors will be found, `Branch protection job` will be executed with succes
 
 [action-action-setup_java-url]: https://github.com/actions/setup-java
 
+[action-re_actor-alls_green-url]: https://github.com/re-actors/alls-green
+
 [action-dorny-paths_filter-url]: https://github.com/dorny/paths-filter
 
 [action-editorconfig_checker-action_editorconfig_checker-url]: https://github.com/editorconfig-checker/action-editorconfig-checker
@@ -234,7 +237,7 @@ If no errors will be found, `Branch protection job` will be executed with succes
 
 [action-reviewdog-actionlint-url]: https://github.com/reviewdog/action-actionlint
 
-[action-schema-validator-url]: https://github.com/cardinalby/schema-validator-action
+[action-cardinalby-schema_validator-url]: https://github.com/cardinalby/schema-validator-action
 
 [badge-build-shield]: https://img.shields.io/github/actions/workflow/status/syskom/ci-cd/ci-main.yaml?branch=main
 
