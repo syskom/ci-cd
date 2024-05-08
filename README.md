@@ -33,7 +33,7 @@ in [.github/actions](.github/actions) directory.
 ### [EditorConfig Check Action – editorconfig-check](.github/actions/editorconfig-check)
 
 Action that Runs [editorconfig-checker](https://github.com/editorconfig-checker/editorconfig-checker) to verify that
-your files are in harmony with your [.editorconfig](https://editorconfig.org/) file.
+all repository files are in harmony with its [.editorconfig](https://editorconfig.org/) file.
 
 #### Permissions
 
@@ -58,8 +58,8 @@ The Action do not have output parameters.
 
 ### [GitHub Actions Check Action – github-actions-check](.github/actions/github-actions-check)
 
-Action that validates [GitHub Actions](https://docs.github.com/en/actions/quickstart) YAML files located
-in `.github/actions` folder.
+Action that validates [GitHub Actions](https://docs.github.com/en/actions/quickstart) YAML files located in folder
+denoted by `file` parameter with the JSON schema of GitHub Action YAML file pointed by `schema` parameter.
 
 #### Permissions
 
@@ -74,7 +74,7 @@ in `.github/actions` folder.
 | Id     | Description                                                                                                                                                                 | Required | Default                                                                                              |
 |--------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------|
 | file   | Path to the GitHub Action YAML file(s). Can accept a glob pattern (will validate all matched files). Can accept multiple files (or glob patterns) separated by `\|` symbol. | false    | .github/actions/\*\*/\*.yaml \| .github/actions/**/*.yml                                             |
-| schema | JSON schema of GitHub Action.                                                                                                                                               | false    | https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/github-action.json |
+| schema | JSON schema of GitHub Action YAML file.                                                                                                                                     | false    | https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/github-action.json |
 
 #### Output parameters
 
@@ -146,7 +146,7 @@ in [.github/workflows](.github/workflows) directory.
 
 ### [gradle-check.yaml](.github/workflows/gradle-check.yaml)
 
-Workflow that runs Gradle `run` task. It uses action.
+Workflow that runs Gradle `check` task.
 
 #### Input parameters
 
@@ -165,6 +165,71 @@ The Workflow do not have output parameters.
 * [Setup Gradle Action][action-gradle-setup_gradle-url]
 * [Setup Java Action][action-action-setup_java-url]
 
+### [reusable-lint-files.yaml](.github/workflows/reusable-lint-files.yaml)
+
+Workflow that runs linting jobs:
+
+* `lint-editorconfig-job` that runs [EditorConfig Check Action](#editorconfig-check-action--editorconfig-check).
+* `lint-github-actions-job` that runs [GitHub Actions Check Action](#github-actions-check-action--github-actions-check).
+* `lint-github-workflows-job` that runs
+  [GitHub Workflows Check Action](#github-workflows-check-action--github-workflows-check).
+* `lint-renovate-config-job` that runs
+  [Renovate Config Check Action](#renovate-config-check-action--renovate-config-check).
+
+By default, none job will be run. It should be enabled by input parameter.
+
+#### Input parameters
+
+| Id                           | Description                                                                                                         | Required | Default                                                                                              | Type    |
+|------------------------------|---------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------|---------|
+| github-actions-file          | Path to the GitHub Action YAML file(s) used by `lint-github-actions-job`.                                           | false    | .github/actions/\*\*/\*.yaml \| .github/actions/**/*.yml                                             | string  |
+| github-actions-schema        | Path to the GitHub Action YAML file schema used by `lint-github-actions-job`.                                       | false    | https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/github-action.json | string  |
+| github-workflows-filter-mode | Filter mode used by `lint-github-workflows-job` to filter results.                                                  | false    | nofilter                                                                                             | string  |
+| github-workflows-reporter    | Reporter used by `lint-renovate-config-job` to report results.                                                      | false    | github-check                                                                                         | string  |
+| lint-editorconfig            | Should run `lint-editorconfig-job` to check that all repository files are in harmony with its `.editorconfig` file. | false    | false                                                                                                | boolean |
+| lint-github-actions          | Should run `lint-github-actions-job` to check GitHub Actions YAML files.                                            | false    | false                                                                                                | boolean |
+| lint-github-workflows        | Should run `lint-github-workflows-job` to check GitHub Workflows YAML files.                                        | false    | false                                                                                                | boolean |
+| lint-renovate-config         | Should run `lint-renovate-config-job` to check Renovate config file.                                                | false    | false                                                                                                | boolean |
+| renovate-config-file-path    | Path to the Renovate config file used by `lint-renovate-config-job`.                                                | false    | .github/renovate.json5                                                                               | string  |
+
+#### Secrets
+
+| Id           | Description                                                                                         |
+|--------------|-----------------------------------------------------------------------------------------------------|
+| GITHUB_TOKEN | Access to this secret is automatically granted to `secrets.GITHUB_TOKEN` for all reusable workflows |
+
+#### Permissions
+
+[Permissions][github-job-permissions] required by job calling this reusable workflow:
+
+| Scope         | Value | Description                                                               |
+|---------------|-------|---------------------------------------------------------------------------|
+| checks        | write |                                                                           |
+| contents      | read  |                                                                           |
+| pull-requests | write | Needed only when `github-workflows-reporter` has `github-pr-check` value. |
+
+#### Output parameters
+
+| Id                           | Description                                |
+|------------------------------|--------------------------------------------|
+| editorconfig-lint-result     | The result of `lint-editorconfig-job`.     |
+| github-actions-lint-result   | The result of `lint-github-actions-job`.   |
+| github-workflows-lint-result | The result of `lint-github-workflows-job`. |
+| renovate-config-lint-result  | The result of `lint-renovate-config-job`.  |
+| workflow-result              | The result of the workflow.                |
+
+#### Used Actions
+
+* [Alls-green Action][action-re_actor-alls_green-url] – checks if all jobs succeeded.
+* [EditorConfig Check Action](#editorconfig-check-action--editorconfig-check) – runs only when `lint-editorconfig`
+  parameter was set to `true`.
+* [GitHub Actions Check Action](#github-actions-check-action--github-actions-check) – runs only when
+  `lint-github-actions` parameter was set to `true`.
+* [GitHub Workflows Check Action](#github-workflows-check-action--github-workflows-check) – runs only when
+  `lint-github-workflows` parameter was set to `true`.
+* [Renovate Config Check Action](#renovate-config-check-action--renovate-config-check) – runs only when
+  `lint-renovate-config` parameter was set to `true`.
+
 ## Repository GitHub Workflows
 
 ### [Continuous Integration Build](.github/workflows/ci-main.yaml)
@@ -173,7 +238,7 @@ Workflow that runs all checks on `main` branch.
 
 #### Trigger condition
 
-New commit merged to the `main` branch.
+New commits pushed to the `main` branch.
 
 Can be also run manually on any branch.
 
@@ -181,15 +246,9 @@ Can be also run manually on any branch.
 
 Info about found errors.
 
-#### Used Actions
+#### Used Actions and Reusable Workflows
 
-* [EditorConfig Check Action](#editorconfig-check-action--editorconfig-check) – check `.editorconfig` file.
-* [GitHub Actions Check Action](#github-actions-check-action--github-actions-check) – check only YAML files with
-  GitHub Actions definition located in `.github/actions` folder.
-* [GitHub Workflows Check Action](#github-workflows-check-action--github-workflows-check) – check only YAML files with
-  GitHub Workflows definition located in `.github/workflows/` folder.
-* [Renovate Config Check Action](#renovate-config-check-action--renovate-config-check) – check `.github/renovate.json5`
-  file.
+* [reusable-lint-files.yaml](#reusable-lint-filesyaml)
 
 ### [Continuous Integration Checks](.github/workflows/ci-pr.yaml)
 

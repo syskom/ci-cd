@@ -1,5 +1,5 @@
 name: EditorConfig Check Action
-description: Runs editorconfig-checker to verify that your files are in harmony with your .editorconfig
+description: Runs editorconfig-checker to verify that all repository files are in harmony with its .editorconfig
 
 runs:
   using: composite
