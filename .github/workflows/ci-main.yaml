@@ -7,13 +7,13 @@ on:
 
   workflow_dispatch: ~
 
-permissions:
-  checks: write
-  contents: read
-
 jobs:
   lint-repository-files:
+    name: Lint all files
     uses: syskom/ci-cd/.github/workflows/reusable-lint-files.yaml@main
+    permissions:
+      checks: write
+      contents: read
     with:
       lint-editorconfig: true
       lint-github-actions: true
