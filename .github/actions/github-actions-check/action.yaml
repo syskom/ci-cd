@@ -1,5 +1,5 @@
-name: GitHub Workflows Check Action
-description: Runs actionlint tool to check GitHub Workflows YAML files
+name: GitHub Actions Check Action
+description: Runs YAML schema validation tool to check GitHub Actions YAML files
 
 inputs:
   file:
@@ -7,7 +7,7 @@ inputs:
     required: false
     default: .github/actions/**/*.yaml|.github/actions/**/*.yml
   schema:
-    description: JSON schema of GitHub Action
+    description: JSON schema of GitHub Action YAML file
     required: false
     default: https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/github-action.json
 

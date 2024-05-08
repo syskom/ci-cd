@@ -8,39 +8,10 @@ on:
   workflow_dispatch: ~
 
 jobs:
-  editorconfig-check:
-    name: Run EditorConfig Action
-    permissions:
-      contents: read
-    runs-on: ubuntu-latest
-    steps:
-      - uses: syskom/ci-cd/.github/actions/editorconfig-check@main
-
-  github-actions-check:
-    name: Check GitHub Actions YAML files
-    permissions:
-      contents: read
-    runs-on: ubuntu-latest
-    steps:
-      - uses: syskom/ci-cd/.github/actions/github-actions-check@main
-
-  github-workflows-check:
-    name: Check GitHub Workflows YAML files
-    permissions:
-      checks: write
-      contents: read
-    runs-on: ubuntu-latest
-    steps:
-      - uses: syskom/ci-cd/.github/actions/github-workflows-check@main
-        with:
-          filter-mode: nofilter
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: github-check
-
-  renovate-config-check:
-    name: Check Renovate Config file
-    permissions:
-      contents: read
-    runs-on: ubuntu-latest
-    steps:
-      - uses: syskom/ci-cd/.github/actions/renovate-config-check@main
+  lint-repository-files:
+    uses: syskom/ci-cd/.github/workflows/reusable-lint-files.yaml@main
+    with:
+      lint-editorconfig: true
+      lint-github-actions: true
+      lint-github-workflows: true
+      lint-renovate-config: true
