@@ -266,18 +266,11 @@ On pull request to `main` branch, after:
 
 If no errors will be found, `Branch protection job` will be executed with success.
 
-#### Used Actions
+#### Used Actions and Reusable Workflows
 
-* [Alls-green Action][action-re_actor-alls_green-url] – checks if all run checks succeeded.
-* [EditorConfig Check Action](#editorconfig-check-action--editorconfig-check) – runs only
-  when `.editorconfig` file was changed.
-* [GitHub Actions Check Action](#github-actions-check-action--github-actions-check) – runs only when YAML files with
-  GitHub Actions definition located in `.github/actions` folder where changed.
-* [GitHub Workflows Check Action](#github-workflows-check-action--github-workflows-check) – runs only when YAML files
-  with GitHub Workflows definition located in `.github/workflows` where changed.
-* [Paths Changes Filter Action][action-dorny-paths_filter-url] – checks what part of the repository was changed.
-* [Renovate Config Check Action](#renovate-config-check-action--renovate-config-check) – runs only
-  when `.github/renovate.json5` file was changed.
+* [Alls-green Action][action-re_actor-alls_green-url] – checks if all required jobs succeeded.
+* [Paths Changes Filter Action][action-dorny-paths_filter-url] – checks what files in the repository were changed.
+* [reusable-lint-files.yaml](#reusable-lint-filesyaml) – runs linting of changed files.
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

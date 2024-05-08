@@ -34,62 +34,31 @@ jobs:
             renovate-config:
               - ".github/renovate.json5"
 
-  editorconfig-check:
-    name: Run EditorConfig Action
-    permissions:
-      contents: read
-    runs-on: ubuntu-latest
-    steps:
-      - uses: syskom/ci-cd/.github/actions/editorconfig-check@main
-
-  github-actions-check:
-    name: Check GitHub Actions YAML files
-    if: needs.changes.outputs.github-actions == 'true'
-    needs: changes
-    permissions:
-      contents: read
-    runs-on: ubuntu-latest
-    steps:
-      - uses: syskom/ci-cd/.github/actions/github-actions-check@main
-
-  github-workflows-check:
-    name: Check GitHub Workflows YAML files
-    if: needs.changes.outputs.github-workflows == 'true'
+  lint-repository-files:
+    name: Lint changed files
+    uses: syskom/ci-cd/.github/workflows/reusable-lint-files.yaml@main
     needs: changes
     permissions:
       checks: write
       contents: read
       pull-requests: write
-    runs-on: ubuntu-latest
-    steps:
-      - uses: syskom/ci-cd/.github/actions/github-workflows-check@main
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
-  renovate-config-check:
-    name: Check Renovate Config file
-    if: needs.changes.outputs.renovate-config == 'true'
-    needs: changes
-    runs-on: ubuntu-latest
-    steps:
-      - uses: syskom/ci-cd/.github/actions/renovate-config-check@main
+    with:
+      github-workflows-filter-mode: file
+      github-workflows-reporter: github-pr-check
+      lint-editorconfig: true
+      lint-github-actions: ${{ needs.changes.outputs.github-actions == 'true' }}
+      lint-github-workflows: ${{ needs.changes.outputs.github-workflows == 'true' }}
+      lint-renovate-config: ${{ needs.changes.outputs.renovate-config == 'true' }}
 
   # This job does nothing and is only used for the branch protection
   all-required-green:
-    name: Check if all required checks succeeded
+    name: Check if all required jobs succeeded
     if: always()
     needs:
-      - editorconfig-check
-      - github-actions-check
-      - github-workflows-check
-      - renovate-config-check
+      - lint-repository-files
     runs-on: ubuntu-latest
     steps:
       - name: Check whether the required jobs succeeded or failed
         uses: re-actors/alls-green@05ac9388f0aebcb5727afa17fcccfecd6f8ec5fe # v1.2.2
         with:
-          allowed-skips: >-
-            github-actions-check,
-            github-workflows-check,
-            renovate-config-check,
           jobs: ${{ toJSON(needs) }}
