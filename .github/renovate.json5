@@ -4,6 +4,7 @@
     "config:best-practices",
     ":semanticCommits"
   ],
+  automergeType: "pr",
   labels: [
     "dependencies",
   ],
@@ -20,6 +21,7 @@
     }
   ],
   platformAutomerge: true,
+  prCreation: "immediate",
   rangeStrategy: "pin",
   vulnerabilityAlerts: {
     enabled: true,

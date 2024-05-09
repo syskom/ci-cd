@@ -264,7 +264,7 @@ On pull request to `main` branch, after:
 
 #### Execution result
 
-If no errors will be found, `Branch protection job` will be executed with success.
+If no errors will be found, `Check if all required jobs succeeded` job will be executed with success.
 
 #### Used Actions and Reusable Workflows
 
