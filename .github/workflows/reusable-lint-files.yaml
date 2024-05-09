@@ -2,65 +2,73 @@ on:
   workflow_call:
     inputs:
       github-actions-file:
-        description: Path to the GitHub Action YAML file(s) used by GitHub Actions Check Composite Action
+        description: Path to the GitHub Action YAML file(s) used by GitHub Actions Check Composite Action.
         required: false
         default: .github/actions/**/*.yaml|.github/actions/**/*.yml
         type: string
       github-actions-schema:
-        description: Path to the GitHub Action YAML file schema used by GitHub Actions Check Composite Action
+        description: Path to the GitHub Action YAML file schema used by GitHub Actions Check Composite Action.
         required: false
         default: https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/github-action.json
         type: string
       github-workflows-filter-mode:
-        description: Filter mode used by GitHub Workflows Check Composite Action to filter results – https://github.com/reviewdog/reviewdog#filter-mode
+        description: >-
+          Filter mode used by GitHub Workflows Check Composite Action to filter
+          results – https://github.com/reviewdog/reviewdog#filter-mode.
         required: false
         default: nofilter
         type: string
       github-workflows-reporter:
-        description: Reporter used by Reviewdog in GitHub Workflows Check Composite Action to report results – https://github.com/reviewdog/reviewdog#reporters
+        description: >-
+          Reporter used by Reviewdog in GitHub Workflows Check Composite Action to report
+          results – https://github.com/reviewdog/reviewdog#reporters.
         required: false
         default: github-check
         type: string
       lint-editorconfig:
-        description: Should run EditorConfig Check Composite Action to verify that all repository files are in harmony with its .editorconfig file
+        description: >-
+          Should run EditorConfig Check Composite Action to verify that all repository files are in harmony
+          with its .editorconfig file.
         required: false
         default: false
         type: boolean
       lint-github-actions:
-        description: Should run GitHub Actions Check Composite Action to check GitHub Actions YAML files
+        description: Should run GitHub Actions Check Composite Action to check GitHub Actions YAML files.
         required: false
         default: false
         type: boolean
       lint-github-workflows:
-        description: Should run GitHub Workflows Check Composite Action to check GitHub Workflows YAML files
+        description: Should run GitHub Workflows Check Composite Action to check GitHub Workflows YAML files.
         required: false
         default: false
         type: boolean
       lint-renovate-config:
-        description: Should run Renovate Config Check Composite Action to check Renovate config file
+        description: Should run Renovate Config Check Composite Action to check Renovate config file.
         required: false
         default: false
         type: boolean
       renovate-config-file-path:
-        description: Path to the Renovate config file – https://docs.renovatebot.com/getting-started/installing-onboarding/#configuration-location
+        description: >-
+          Path to the Renovate config
+          file – https://docs.renovatebot.com/getting-started/installing-onboarding/#configuration-location.
         required: false
         default: .github/renovate.json5
         type: string
     outputs:
       editorconfig-lint-result:
-        description: The result of lint-editorconfig-job
+        description: The result of lint-editorconfig-job.
         value: ${{ fromJSON(toJSON(jobs.lint-editorconfig-job)).result }}
       github-actions-lint-result:
-        description: The result of lint-github-actions-job
+        description: The result of lint-github-actions-job.
         value: ${{ fromJSON(toJSON(jobs.lint-github-actions-job)).result }}
       github-workflows-lint-result:
-        description: The result of lint-github-workflows-job
+        description: The result of lint-github-workflows-job.
         value: ${{ fromJSON(toJSON(jobs.lint-github-workflows-job)).result }}
       renovate-config-lint-result:
-        description: The result of lint-renovate-config-job
+        description: The result of lint-renovate-config-job.
         value: ${{ fromJSON(toJSON(jobs.lint-renovate-config-job)).result }}
       workflow-result:
-        description: The final result of the workflow
+        description: The final result of the workflow.
         value: ${{ fromJSON(toJSON(jobs.workflow-result-job)).result }}
 
 jobs:
@@ -109,7 +117,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Determine the result of the workflow based on the result of run linting jobs
-        uses: re-actors/alls-green@05ac9388f0aebcb5727afa17fcccfecd6f8ec5fe # v1.2.2
+        uses: re-actors/alls-green@05ac9388f0aebcb5727afa17fcccfecd6f8ec5fe  # v1.2.2
         with:
           allowed-skips: >-
             lint-editorconfig-job,
