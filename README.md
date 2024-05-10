@@ -139,6 +139,37 @@ Runs `renovate-config-validator` tool to check [Renovate](https://docs.renovateb
 
 The Action do not have output parameters.
 
+### [YAML Lint Action – yaml-lint](.github/actions/yaml-lint)
+
+Action that lints [YAML](https://yaml.org) files.
+
+#### Permissions
+
+[Permissions][github-job-permissions] required by job calling this action:
+
+| Scope         | Value | Description                               |
+|---------------|-------|-------------------------------------------|
+| checks        | write |                                           |
+| contents      | read  |                                           |
+| pull-requests | write | Needed only when runs on the pull request |
+
+#### Input parameters
+
+| Id           | Description                                                                                           | Required | Default         |
+|--------------|-------------------------------------------------------------------------------------------------------|----------|-----------------|
+| filter-mode  | Filter mode used by Reviewdog to filter results – https://github.com/reviewdog/reviewdog#filter-mode. | false    | file            |
+| github-token | GitHub token, can be read from `secrets.GITHUB_TOKEN`.                                                | true     | none            |
+| reporter     | Reporter used by Reviewdog to report results – https://github.com/reviewdog/reviewdog#reporters.      | false    | github-pr-check |
+
+#### Output parameters
+
+The Action do not have output parameters.
+
+#### Used Actions
+
+* [Checkout Action][action-action-checkout-url]
+* [Reviewdog Yamllint Action][action-reviewdog-yamllint-url]
+
 ## GitHub Reusable Workflows
 
 [GitHub Reusable Workflows][github-reusable-workflows-url] are located
@@ -220,7 +251,7 @@ By default, none job will be run. It should be enabled by input parameter.
 
 #### Used Actions
 
-* [Alls-green Action][action-re_actor-alls_green-url] – checks if all jobs succeeded.
+* [Alls-green Action][action-re_actors-alls_green-url] – checks if all jobs succeeded.
 * [EditorConfig Check Action](#editorconfig-check-action--editorconfig-check) – runs only when `lint-editorconfig`
   parameter was set to `true`.
 * [GitHub Actions Check Action](#github-actions-check-action--github-actions-check) – runs only when
@@ -268,7 +299,7 @@ If no errors will be found, `Check if all required jobs succeeded` job will be e
 
 #### Used Actions and Reusable Workflows
 
-* [Alls-green Action][action-re_actor-alls_green-url] – checks if all required jobs succeeded.
+* [Alls-green Action][action-re_actors-alls_green-url] – checks if all required jobs succeeded.
 * [Paths Changes Filter Action][action-dorny-paths_filter-url] – checks what files in the repository were changed.
 * [reusable-lint-files.yaml](#reusable-lint-filesyaml) – runs linting of changed files.
 
@@ -279,7 +310,7 @@ If no errors will be found, `Check if all required jobs succeeded` job will be e
 
 [action-action-setup_java-url]: https://github.com/actions/setup-java
 
-[action-re_actor-alls_green-url]: https://github.com/re-actors/alls-green
+[action-cardinalby-schema_validator-url]: https://github.com/cardinalby/schema-validator-action
 
 [action-dorny-paths_filter-url]: https://github.com/dorny/paths-filter
 
@@ -289,7 +320,9 @@ If no errors will be found, `Check if all required jobs succeeded` job will be e
 
 [action-reviewdog-actionlint-url]: https://github.com/reviewdog/action-actionlint
 
-[action-cardinalby-schema_validator-url]: https://github.com/cardinalby/schema-validator-action
+[action-reviewdog-yamllint-url]: https://github.com/reviewdog/action-yamllint
+
+[action-re_actors-alls_green-url]: https://github.com/re-actors/alls-green
 
 [badge-build-shield]: https://img.shields.io/github/actions/workflow/status/syskom/ci-cd/ci-main.yaml?branch=main
 
