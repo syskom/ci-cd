@@ -19,4 +19,4 @@ jobs:
       lint-github-actions: true
       lint-github-workflows: true
       lint-renovate-config: true
-      lint-yaml-file: true
+      lint-yaml-files: true

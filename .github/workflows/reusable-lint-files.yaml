@@ -133,7 +133,7 @@ jobs:
 
   lint-yaml-files-job:
     if: inputs.lint-yaml-files
-    name: Check Renovate Config file
+    name: Check YAML files
     runs-on: ubuntu-latest
     steps:
       - uses: syskom/ci-cd/.github/actions/yaml-lint@main
