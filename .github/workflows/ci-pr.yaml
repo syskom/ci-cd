@@ -17,6 +17,7 @@ jobs:
       github-actions: ${{ steps.filter.outputs.github-actions }}
       github-workflows: ${{ steps.filter.outputs.github-workflows }}
       renovate-config: ${{ steps.filter.outputs.renovate-config }}
+      yaml-files: ${{ steps.filter.outputs.yaml-files }}
     permissions:
       pull-requests: read
     runs-on: ubuntu-latest
@@ -30,9 +31,12 @@ jobs:
               - ".github/actions/**/*.yaml"
             github-workflows:
               - ".github/workflows/*.yaml"
-              - ".github/workflows/*.yml"
             renovate-config:
               - ".github/renovate.json5"
+            yaml-files:
+              - ".github/actions/**/*.yaml"
+              - ".github/workflows/*.yaml"
+              - ".yamllint.yaml"
 
   lint-repository-files:
     name: Lint changed files
@@ -43,12 +47,15 @@ jobs:
       contents: read
       pull-requests: write
     with:
-      github-workflows-filter-mode: file
-      github-workflows-reporter: github-pr-check
       lint-editorconfig: true
       lint-github-actions: ${{ needs.changes.outputs.github-actions == 'true' }}
       lint-github-workflows: ${{ needs.changes.outputs.github-workflows == 'true' }}
+      lint-github-workflows-filter-mode: file
+      lint-github-workflows-reporter: github-pr-check
       lint-renovate-config: ${{ needs.changes.outputs.renovate-config == 'true' }}
+      lint-yaml-files: ${{ needs.changes.outputs.yaml-files == 'true' }}
+      lint-yaml-files-filter-mode: file
+      lint-yaml-files-reporter: github-pr-check
 
   # This job does nothing and is only used for the branch protection
   all-required-green:
