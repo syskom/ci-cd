@@ -6,6 +6,7 @@ rules:
   comments:
     min-spaces-from-content: 1
   document-start: disable
+  key-ordering: enable
   line-length:
     max: 120
   truthy:

@@ -3,47 +3,47 @@ on:
     inputs:
       lint-editorconfig:
         description: >-
-          Should run EditorConfig Check Composite Action to verify that all repository files are in harmony
+          Should run EditorConfig Lint Composite Action to verify that all repository files are in harmony
           with its .editorconfig file.
         required: false
         default: false
         type: boolean
       lint-github-actions:
-        description: Should run GitHub Actions Check Composite Action to check GitHub Actions YAML files.
+        description: Should run GitHub Actions Lint Composite Action to lint GitHub Actions YAML files.
         required: false
         default: false
         type: boolean
       lint-github-actions-file:
-        description: Path to the GitHub Action YAML file(s) used by GitHub Actions Check Composite Action.
+        description: Path to the GitHub Action YAML file(s) used by GitHub Actions Lint Composite Action.
         required: false
         default: .github/actions/**/*.yaml|.github/actions/**/*.yml
         type: string
       lint-github-actions-schema:
-        description: Path to the GitHub Action YAML file schema used by GitHub Actions Check Composite Action.
+        description: Path to the GitHub Action YAML file schema used by GitHub Actions Lint Composite Action.
         required: false
         default: https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/github-action.json
         type: string
       lint-github-workflows:
-        description: Should run GitHub Workflows Check Composite Action to check GitHub Workflows YAML files.
+        description: Should run GitHub Workflows Lint Composite Action to lint GitHub Workflows YAML files.
         required: false
         default: false
         type: boolean
       lint-github-workflows-filter-mode:
         description: >-
-          Filter mode used by Reviewdog in GitHub Workflows Check Composite Action to filter
+          Filter mode used by Reviewdog in GitHub Workflows Lint Composite Action to filter
           results – https://github.com/reviewdog/reviewdog#filter-mode.
         required: false
         default: nofilter
         type: string
       lint-github-workflows-reporter:
         description: >-
-          Reporter used by Reviewdog in GitHub Workflows Check Composite Action to report
+          Reporter used by Reviewdog in GitHub Workflows Lint Composite Action to report
           results – https://github.com/reviewdog/reviewdog#reporters.
         required: false
         default: github-check
         type: string
       lint-renovate-config:
-        description: Should run Renovate Config Check Composite Action to check Renovate config file.
+        description: Should run Renovate Config Lint Composite Action to lint Renovate config file.
         required: false
         default: false
         type: boolean
@@ -55,7 +55,7 @@ on:
         default: .github/renovate.json5
         type: string
       lint-yaml-files:
-        description: Should run YAML Lint Composite Action to check YAML files.
+        description: Should run YAML Lint Composite Action to lint YAML files.
         required: false
         default: false
         type: boolean
@@ -99,24 +99,24 @@ jobs:
     name: Run EditorConfig Action
     runs-on: ubuntu-latest
     steps:
-      - uses: syskom/ci-cd/.github/actions/editorconfig-check@main
+      - uses: syskom/ci-cd/.github/actions/editorconfig-lint@main
 
   lint-github-actions-job:
     if: inputs.lint-github-actions
-    name: Check GitHub Actions YAML files
+    name: Lint GitHub Actions YAML files
     runs-on: ubuntu-latest
     steps:
-      - uses: syskom/ci-cd/.github/actions/github-actions-check@main
+      - uses: syskom/ci-cd/.github/actions/github-actions-lint@main
         with:
           file: ${{ inputs.lint-github-actions-file }}
           schema: ${{ inputs.lint-github-actions-schema }}
 
   lint-github-workflows-job:
     if: inputs.lint-github-workflows
-    name: Check GitHub Workflows YAML files
+    name: Lint GitHub Workflows YAML files
     runs-on: ubuntu-latest
     steps:
-      - uses: syskom/ci-cd/.github/actions/github-workflows-check@main
+      - uses: syskom/ci-cd/.github/actions/github-workflows-lint@main
         with:
           filter-mode: ${{ inputs.lint-github-workflows-filter-mode }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -124,16 +124,16 @@ jobs:
 
   lint-renovate-config-job:
     if: inputs.lint-renovate-config
-    name: Check Renovate Config file
+    name: Lint Renovate Config file
     runs-on: ubuntu-latest
     steps:
-      - uses: syskom/ci-cd/.github/actions/renovate-config-check@main
+      - uses: syskom/ci-cd/.github/actions/renovate-config-lint@main
         with:
           config-file-path: ${{ inputs.lint-renovate-config-file-path }}
 
   lint-yaml-files-job:
     if: inputs.lint-yaml-files
-    name: Check YAML files
+    name: Lint YAML files
     runs-on: ubuntu-latest
     steps:
       - uses: syskom/ci-cd/.github/actions/yaml-lint@main
