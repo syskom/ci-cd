@@ -1,30 +1,6 @@
 on:
   workflow_call:
     inputs:
-      github-actions-file:
-        description: Path to the GitHub Action YAML file(s) used by GitHub Actions Check Composite Action.
-        required: false
-        default: .github/actions/**/*.yaml|.github/actions/**/*.yml
-        type: string
-      github-actions-schema:
-        description: Path to the GitHub Action YAML file schema used by GitHub Actions Check Composite Action.
-        required: false
-        default: https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/github-action.json
-        type: string
-      github-workflows-filter-mode:
-        description: >-
-          Filter mode used by GitHub Workflows Check Composite Action to filter
-          results – https://github.com/reviewdog/reviewdog#filter-mode.
-        required: false
-        default: nofilter
-        type: string
-      github-workflows-reporter:
-        description: >-
-          Reporter used by Reviewdog in GitHub Workflows Check Composite Action to report
-          results – https://github.com/reviewdog/reviewdog#reporters.
-        required: false
-        default: github-check
-        type: string
       lint-editorconfig:
         description: >-
           Should run EditorConfig Check Composite Action to verify that all repository files are in harmony
@@ -37,22 +13,65 @@ on:
         required: false
         default: false
         type: boolean
+      lint-github-actions-file:
+        description: Path to the GitHub Action YAML file(s) used by GitHub Actions Check Composite Action.
+        required: false
+        default: .github/actions/**/*.yaml|.github/actions/**/*.yml
+        type: string
+      lint-github-actions-schema:
+        description: Path to the GitHub Action YAML file schema used by GitHub Actions Check Composite Action.
+        required: false
+        default: https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/github-action.json
+        type: string
       lint-github-workflows:
         description: Should run GitHub Workflows Check Composite Action to check GitHub Workflows YAML files.
         required: false
         default: false
         type: boolean
+      lint-github-workflows-filter-mode:
+        description: >-
+          Filter mode used by Reviewdog in GitHub Workflows Check Composite Action to filter
+          results – https://github.com/reviewdog/reviewdog#filter-mode.
+        required: false
+        default: nofilter
+        type: string
+      lint-github-workflows-reporter:
+        description: >-
+          Reporter used by Reviewdog in GitHub Workflows Check Composite Action to report
+          results – https://github.com/reviewdog/reviewdog#reporters.
+        required: false
+        default: github-check
+        type: string
       lint-renovate-config:
         description: Should run Renovate Config Check Composite Action to check Renovate config file.
         required: false
         default: false
         type: boolean
-      renovate-config-file-path:
+      lint-renovate-config-file-path:
         description: >-
           Path to the Renovate config
           file – https://docs.renovatebot.com/getting-started/installing-onboarding/#configuration-location.
         required: false
         default: .github/renovate.json5
+        type: string
+      lint-yaml-files:
+        description: Should run YAML Lint Composite Action to check YAML files.
+        required: false
+        default: false
+        type: boolean
+      lint-yaml-files-filter-mode:
+        description: >-
+          Filter mode used by Reviewdog in YAML Lint Composite Action to filter
+          results – https://github.com/reviewdog/reviewdog#filter-mode.
+        required: false
+        default: nofilter
+        type: string
+      lint-yaml-files-reporter:
+        description: >-
+          Reporter used by Reviewdog in YAML Lint Composite Action to report
+          results – https://github.com/reviewdog/reviewdog#reporters.
+        required: false
+        default: github-check
         type: string
     outputs:
       editorconfig-lint-result:
@@ -70,6 +89,9 @@ on:
       workflow-result:
         description: The final result of the workflow.
         value: ${{ fromJSON(toJSON(jobs.workflow-result-job)).result }}
+      yaml-files-lint-result:
+        description: The result of lint-yaml-files-job.
+        value: ${{ fromJSON(toJSON(jobs.lint-yaml-files-job)).result }}
 
 jobs:
   lint-editorconfig-job:
@@ -85,6 +107,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: syskom/ci-cd/.github/actions/github-actions-check@main
+        with:
+          file: ${{ inputs.lint-github-actions-file }}
+          schema: ${{ inputs.lint-github-actions-schema }}
 
   lint-github-workflows-job:
     if: inputs.lint-github-workflows
@@ -93,9 +118,9 @@ jobs:
     steps:
       - uses: syskom/ci-cd/.github/actions/github-workflows-check@main
         with:
-          filter-mode: ${{ inputs.github-workflows-filter-mode }}
+          filter-mode: ${{ inputs.lint-github-workflows-filter-mode }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          reporter: ${{ inputs.github-workflows-reporter }}
+          reporter: ${{ inputs.lint-github-workflows-reporter }}
 
   lint-renovate-config-job:
     if: inputs.lint-renovate-config
@@ -104,7 +129,18 @@ jobs:
     steps:
       - uses: syskom/ci-cd/.github/actions/renovate-config-check@main
         with:
-          config-file-path: ${{ inputs.renovate-config-file-path }}
+          config-file-path: ${{ inputs.lint-renovate-config-file-path }}
+
+  lint-yaml-files-job:
+    if: inputs.lint-yaml-files
+    name: Check Renovate Config file
+    runs-on: ubuntu-latest
+    steps:
+      - uses: syskom/ci-cd/.github/actions/yaml-lint@main
+        with:
+          filter-mode: ${{ inputs.lint-yaml-files-filter-mode }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          reporter: ${{ inputs.lint-yaml-files-reporter }}
 
   workflow-result-job:
     name: Determine the result of the workflow
@@ -114,6 +150,7 @@ jobs:
       - lint-github-actions-job
       - lint-github-workflows-job
       - lint-renovate-config-job
+      - lint-yaml-files-job
     runs-on: ubuntu-latest
     steps:
       - name: Determine the result of the workflow based on the result of run linting jobs
@@ -124,4 +161,5 @@ jobs:
             lint-github-actions-job,
             lint-github-workflows-job,
             lint-renovate-config-job,
+            lint-yaml-files-job,
           jobs: ${{ toJSON(needs) }}
