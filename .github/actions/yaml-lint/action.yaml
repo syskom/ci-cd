@@ -1,5 +1,5 @@
-name: YAML Lint Action
-description: Runs yamllint tool to check YAML files
+name: YAML Lint Composite Action
+description: Runs yamllint tool to lint YAML files
 
 inputs:
   filter-mode:

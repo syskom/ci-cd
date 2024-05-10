@@ -1,5 +1,5 @@
-name: Renovate Config Check Action
-description: Runs renovate-config-validator tool to check Renovate config file
+name: Renovate Config Lint Composite Action
+description: Runs renovate-config-validator tool to lint Renovate config file
 
 inputs:
   config-file-path:
@@ -15,7 +15,7 @@ runs:
     - name: Checkout code
       uses: actions/checkout@44c2b7a8a4ea60a981eaca3cf939b5f4305c123b # v4.1.5
 
-    - name: Check Renovate Config file
+    - name: Lint Renovate Config file
       uses: suzuki-shunsuke/github-action-renovate-config-validator@main
       with:
         config_file_path: ${{ inputs.config-file-path }}

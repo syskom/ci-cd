@@ -30,7 +30,7 @@ the [MIT License][license-url].
 [GitHub Composite Actions][github-composite-actions-url] are located
 in [.github/actions](.github/actions) directory.
 
-### [EditorConfig Check Composite Action – editorconfig-check](.github/actions/editorconfig-check)
+### [EditorConfig Lint Composite Action – editorconfig-lint](.github/actions/editorconfig-lint)
 
 Action that Runs [editorconfig-checker](https://github.com/editorconfig-checker/editorconfig-checker) to verify that
 all repository files are in harmony with its [.editorconfig](https://editorconfig.org/) file.
@@ -56,7 +56,7 @@ The Action do not have output parameters.
 * [Checkout Action][action-action-checkout-url]
 * [EditorConfig Action][action-editorconfig_checker-action_editorconfig_checker-url]
 
-### [GitHub Actions Check Composite Action – github-actions-check](.github/actions/github-actions-check)
+### [GitHub Actions Lint Composite Action – github-actions-lint](.github/actions/github-actions-lint)
 
 Action that validates [GitHub Actions](https://docs.github.com/en/actions/quickstart) YAML files located in folder
 denoted by `file` parameter with the JSON schema of GitHub Action YAML file pointed by `schema` parameter.
@@ -85,7 +85,7 @@ The Action do not have output parameters.
 * [Checkout Action][action-action-checkout-url]
 * [JSON Schema validator Action][action-cardinalby-schema_validator-url]
 
-### [GitHub Workflows Check Composite Action – github-workflows-check](.github/actions/github-workflows-check)
+### [GitHub Workflows Lint Composite Action – github-workflows-lint](.github/actions/github-workflows-lint)
 
 Action that validates [GitHub Workflow](https://docs.github.com/en/actions/using-workflows) YAML files located
 in `.github/workflows` folder.
@@ -117,9 +117,9 @@ The Action do not have output parameters.
 * [Checkout Action][action-action-checkout-url]
 * [Reviewdog Actionlint Action][action-reviewdog-actionlint-url]
 
-### [Renovate Config Check Composite Action – renovate-config-check](.github/actions/renovate-config-check)
+### [Renovate Config Lint Composite Action – renovate-config-lint](.github/actions/renovate-config-lint)
 
-Runs `renovate-config-validator` tool to check [Renovate](https://docs.renovatebot.com/) config file.
+Runs `renovate-config-validator` tool to lint [Renovate](https://docs.renovatebot.com/) config file.
 
 #### Permissions
 
@@ -201,13 +201,13 @@ The Workflow do not have output parameters.
 Workflow that runs linting jobs:
 
 * `lint-editorconfig-job` that
-  runs [EditorConfig Check Composite Action](#editorconfig-check-composite-action--editorconfig-check).
+  runs [EditorConfig Lint Composite Action](#editorconfig-lint-composite-action--editorconfig-lint).
 * `lint-github-actions-job` that
-  runs [GitHub Actions Check Composite Action](#github-actions-check-composite-action--github-actions-check).
+  runs [GitHub Actions Lint Composite Action](#github-actions-lint-composite-action--github-actions-lint).
 * `lint-github-workflows-job` that runs
-  [GitHub Workflows Check Composite Action](#github-workflows-check-composite-action--github-workflows-check).
+  [GitHub Workflows Lint Composite Action](#github-workflows-lint-composite-action--github-workflows-lint).
 * `lint-renovate-config-job` that runs
-  [Renovate Config Check Composite Action](#renovate-config-check-composite-action--renovate-config-check).
+  [Renovate Config Lint Composite Action](#renovate-config-lint-composite-action--renovate-config-lint).
 * `lint-yaml-files-job` that runs [YAML Lint Composite Action](#yaml-lint-composite-action--yaml-lint).
 
 By default, none job will be run. It should be enabled by input parameter.
@@ -217,15 +217,15 @@ By default, none job will be run. It should be enabled by input parameter.
 | Id                                | Description                                                                                                         | Required | Default                                                                                              | Type    |
 |-----------------------------------|---------------------------------------------------------------------------------------------------------------------|----------|------------------------------------------------------------------------------------------------------|---------|
 | lint-editorconfig                 | Should run `lint-editorconfig-job` to check that all repository files are in harmony with its `.editorconfig` file. | false    | false                                                                                                | boolean |
-| lint-github-actions               | Should run `lint-github-actions-job` to check GitHub Actions YAML files.                                            | false    | false                                                                                                | boolean |
+| lint-github-actions               | Should run `lint-github-actions-job` to lint GitHub Actions YAML files.                                             | false    | false                                                                                                | boolean |
 | lint-github-actions-file          | Path to the GitHub Action YAML file(s) used by `lint-github-actions-job`.                                           | false    | .github/actions/\*\*/\*.yaml \| .github/actions/**/*.yml                                             | string  |
 | lint-github-actions-schema        | Path to the GitHub Action YAML file schema used by `lint-github-actions-job`.                                       | false    | https://raw.githubusercontent.com/SchemaStore/schemastore/master/src/schemas/json/github-action.json | string  |
-| lint-github-workflows             | Should run `lint-github-workflows-job` to check GitHub Workflows YAML files.                                        | false    | false                                                                                                | boolean |
+| lint-github-workflows             | Should run `lint-github-workflows-job` to lint GitHub Workflows YAML files.                                         | false    | false                                                                                                | boolean |
 | lint-github-workflows-filter-mode | Filter mode used by `lint-github-workflows-job` to filter results.                                                  | false    | nofilter                                                                                             | string  |
 | lint-github-workflows-reporter    | Reporter used by `lint-github-workflows-job` to report results.                                                     | false    | github-check                                                                                         | string  |
-| lint-renovate-config              | Should run `lint-renovate-config-job` to check Renovate config file.                                                | false    | false                                                                                                | boolean |
+| lint-renovate-config              | Should run `lint-renovate-config-job` to lint Renovate config file.                                                 | false    | false                                                                                                | boolean |
 | lint-renovate-config-file-path    | Path to the Renovate config file used by `lint-renovate-config-job`.                                                | false    | .github/renovate.json5                                                                               | string  |
-| lint-yaml-files                   | Should run `lint-yaml-files-job` to check YAML files.                                                               | false    | false                                                                                                | boolean |
+| lint-yaml-files                   | Should run `lint-yaml-files-job` to lint YAML files.                                                                | false    | false                                                                                                | boolean |
 | lint-yaml-files-filter-mode       | Filter mode used by `lint-yaml-files-job` to filter results.                                                        | false    | nofilter                                                                                             | string  |
 | lint-yaml-files-reporter          | Reporter used by `lint-yaml-files-job` to report results.                                                           | false    | github-check                                                                                         | string  |
 
@@ -259,13 +259,13 @@ By default, none job will be run. It should be enabled by input parameter.
 #### Used Actions
 
 * [Alls-green Action][action-re_actors-alls_green-url] – checks if all jobs succeeded.
-* [EditorConfig Check Composite Action](#editorconfig-check-composite-action--editorconfig-check) – runs only when
+* [EditorConfig Lint Composite Action](#editorconfig-lint-composite-action--editorconfig-lint) – runs only when
   `lint-editorconfig` parameter was set to `true`.
-* [GitHub Actions Check Composite Action](#github-actions-check-composite-action--github-actions-check) – runs only
+* [GitHub Actions Lint Composite Action](#github-actions-lint-composite-action--github-actions-lint) – runs only
   when `lint-github-actions` parameter was set to `true`.
-* [GitHub Workflows Check Composite Action](#github-workflows-check-composite-action--github-workflows-check) – runs
+* [GitHub Workflows Lint Composite Action](#github-workflows-lint-composite-action--github-workflows-lint) – runs
   only when `lint-github-workflows` parameter was set to `true`.
-* [Renovate Config Check Composite Action](#renovate-config-check-composite-action--renovate-config-check) – runs only
+* [Renovate Config Lint Composite Action](#renovate-config-lint-composite-action--renovate-config-lint) – runs only
   when `lint-renovate-config` parameter was set to `true`.
 * [YAML Lint Composite Action](#yaml-lint-composite-action--yaml-lint) – runs only when `lint-yaml-files` parameter
   was set to `true`.

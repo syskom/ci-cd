@@ -1,4 +1,4 @@
-name: EditorConfig Check Action
+name: EditorConfig Lint Composite Action
 description: Runs editorconfig-checker to verify that all repository files are in harmony with its .editorconfig
 
 runs:
