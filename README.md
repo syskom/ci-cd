@@ -175,16 +175,18 @@ The Action do not have output parameters.
 [GitHub Reusable Workflows][github-reusable-workflows-url] are located
 in [.github/workflows](.github/workflows) directory.
 
-### [gradle-check.yaml](.github/workflows/gradle-check.yaml)
+### [reusable-gradle-check.yaml](.github/workflows/reusable-gradle-check.yaml)
 
 Workflow that runs Gradle `check` task.
 
 #### Input parameters
 
-| Id                | Description                                                                                     | Required | Default | Type   |
-|-------------------|-------------------------------------------------------------------------------------------------|----------|---------|--------|
-| java-distribution | Which Java distribution to use – https://github.com/actions/setup-java#supported-distributions. | false    | temurin | string |
-| java-version      | Which Java version to use – https://github.com/actions/setup-java#supported-version-syntax.     | false    | 21      | string |
+| Id                    | Description                                                                                                | Required | Default | Type    |
+|-----------------------|------------------------------------------------------------------------------------------------------------|----------|---------|---------|
+| java-distribution     | Which Java distribution to use – https://github.com/actions/setup-java#supported-distributions.            | false    | temurin | string  |
+| java-version          | Which Java version to use – https://github.com/actions/setup-java#supported-version-syntax.                | false    | 21      | string  |
+| run-sonar-scan        | Should run [SonarCloud](https://sonarcloud.io) scan.                                                       | false    | false   | boolean |
+| sonar-timeout-seconds | The number of seconds that the build should wait for a report to be processed. The default is 300 seconds. | false    | 300     | number  |
 
 #### Output parameters
 
