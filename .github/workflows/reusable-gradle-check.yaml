@@ -2,15 +2,30 @@ on:
   workflow_call:
     inputs:
       java-distribution:
-        description: Which Java distribution to use – https://github.com/actions/setup-java#supported-distributions
+        description: Which Java distribution to use – https://github.com/actions/setup-java#supported-distributions.
         required: false
         default: temurin
         type: string
       java-version:
-        description: Which Java version to use – https://github.com/actions/setup-java#supported-version-syntax
+        description: Which Java version to use – https://github.com/actions/setup-java#supported-version-syntax.
         required: false
         default: 21
         type: string
+      run-sonar-scan:
+        description: Should run SonarCloud scan.
+        required: false
+        default: false
+        type: boolean
+      sonar-timeout-seconds:
+        description: >-
+          The number of seconds that the build should wait for a report to be processed. The default is 300 seconds.
+        required: false
+        default: 300
+        type: number
+    secrets:
+      SONAR_TOKEN:
+        required: false
+        description: The token for authenticating to SonarCloud
 
 defaults:
   run:
@@ -45,5 +60,16 @@ jobs:
       - name: Execute Gradle 'check' task
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          ./gradlew check -i
+          ./gradlew check --info
+
+      - name: Execute Gradle 'sonar' task
+        if: ${{ inputs.run-sonar-scan }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ./gradlew \
+          -Dsonar.qualitygate.timeout=${{ inputs.sonar-timeout-seconds }} \
+          -Dsonar.qualitygate.wait=true \
+          sonar --info
