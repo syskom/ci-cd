@@ -1,6 +1,15 @@
 on:
   workflow_call:
     inputs:
+      add-gradle-job-summary-as-pr-comment:
+        description: >-
+          Add Gradle Job Summary data as a Pull Request comment. Valid values are "never" (default), "always",
+          and "on-failure". Note that to add a Pull Request comment, the workflow must be configured with
+          the pull-requests: write permission. See
+          https://github.com/gradle/actions/blob/main/docs/setup-gradle.md#adding-job-summary-as-a-pull-request-comment
+        required: false
+        default: never
+        type: string
       java-distribution:
         description: Which Java distribution to use – https://github.com/actions/setup-java#supported-distributions.
         required: false
@@ -31,10 +40,6 @@ defaults:
   run:
     shell: bash
 
-permissions:
-  contents: read
-  pull-requests: write  # required by gradle/actions/setup-gradle to add job summary
-
 jobs:
   gradle-check:
     name: Run Gradle check
@@ -53,7 +58,7 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@db19848a5fa7950289d3668fb053140cf3028d43 # v3.3.2
         with:
-          add-job-summary-as-pr-comment: on-failure
+          add-job-summary-as-pr-comment: ${{ inputs.add-gradle-job-summary-as-pr-comment }}
           gradle-version: wrapper
           validate-wrappers: true
 
