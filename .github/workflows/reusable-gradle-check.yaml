@@ -64,18 +64,18 @@ jobs:
           validate-wrappers: true
 
       - name: Execute Gradle 'check' task
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           ./gradlew check --info
 
       - name: Execute Gradle 'sonar' task
         if: ${{ inputs.run-sonar-scan }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           ./gradlew \
           -Dsonar.qualitygate.timeout=${{ inputs.sonar-timeout-seconds }} \
           -Dsonar.qualitygate.wait=true \
           sonar --info
+
+      - name: Cleanup Gradle Daemons
+        run: ./gradlew --stop

@@ -208,6 +208,37 @@ The Workflow do not have output parameters.
 * [Setup Gradle Action][action-gradle-setup_gradle-url]
 * [Setup Java Action][action-action-setup_java-url]
 
+### [reusable-gradle-codeql.yaml](.github/workflows/reusable-gradle-codeql.yaml)
+
+Workflow that performs [CodeQL][codeql-url] analysis on code compiled by Gradle.
+
+#### Permissions
+
+[Permissions][github-job-permissions] required by job calling this action:
+
+| Scope           | Value | Description                                         |
+|-----------------|-------|-----------------------------------------------------|
+| contents        | read  |                                                     |
+| security-events | write | https://github.com/github/codeql-action#permissions |
+
+#### Input parameters
+
+| Id                | Description                                                                                     | Required | Default | Type   |
+|-------------------|-------------------------------------------------------------------------------------------------|----------|---------|--------|
+| java-distribution | Which Java distribution to use – https://github.com/actions/setup-java#supported-distributions. | false    | temurin | string |
+| java-version      | Which Java version to use – https://github.com/actions/setup-java#supported-version-syntax.     | false    | 21      | string |
+
+#### Output parameters
+
+The Workflow do not have output parameters.
+
+#### Used Actions
+
+* [Checkout Action][action-action-checkout-url]
+* [CodeQL Action][action-github-codeql-url]
+* [Setup Gradle Action][action-gradle-setup_gradle-url]
+* [Setup Java Action][action-action-setup_java-url]
+
 ### [reusable-lint-files.yaml](.github/workflows/reusable-lint-files.yaml)
 
 Workflow that runs linting jobs:
@@ -337,6 +368,8 @@ If no errors will be found, `Check if all required jobs succeeded` job will be e
 
 [action-editorconfig_checker-action_editorconfig_checker-url]: https://github.com/editorconfig-checker/action-editorconfig-checker
 
+[action-github-codeql-url]: https://github.com/github/codeql-action
+
 [action-gradle-setup_gradle-url]: https://github.com/gradle/actions/blob/main/docs/setup-gradle.md
 
 [action-reviewdog-actionlint-url]: https://github.com/reviewdog/action-actionlint
@@ -380,6 +413,8 @@ If no errors will be found, `Check if all required jobs succeeded` job will be e
 [badge-stars-shield]: https://img.shields.io/github/stars/syskom/ci-cd.svg
 
 [badge-stars-url]: https://github.com/syskom/ci-cd/stargazers
+
+[codeql-url]: https://codeql.github.com/docs/codeql-overview/about-codeql/
 
 [github-composite-actions-url]: https://docs.github.com/en/actions/creating-actions/creating-a-composite-action
 
