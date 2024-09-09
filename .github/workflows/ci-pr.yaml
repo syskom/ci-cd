@@ -10,7 +10,6 @@ on:
       - reopened
       - synchronize
 
-
 # https://docs.github.com/en/actions/using-jobs/using-concurrency https://stackoverflow.com/a/72408109/16358266
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -67,7 +66,7 @@ jobs:
   # This job does nothing and is only used for the branch protection
   all-required-green:
     name: Check if all required jobs succeeded
-    if: always()
+    if: ${{ !cancelled() }}
     needs:
       - lint-repository-files
     runs-on: ubuntu-latest
