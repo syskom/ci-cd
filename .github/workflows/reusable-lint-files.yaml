@@ -145,7 +145,7 @@ jobs:
 
   workflow-result-job:
     name: Determine the result of the workflow
-    if: always()
+    if: ${{ !cancelled() }}
     needs:
       - lint-editorconfig-job
       - lint-github-actions-job
