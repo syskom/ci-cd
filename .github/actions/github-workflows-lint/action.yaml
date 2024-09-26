@@ -21,7 +21,7 @@ runs:
       uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
 
     - name: Lint GitHub Workflows YAML files
-      uses: reviewdog/action-actionlint@4f8f9963ca57a41e5fd5b538dd79dbfbd3e0b38a # v1.54.0
+      uses: reviewdog/action-actionlint@15a7a477ab5ab768a41c39b2c53970bf151c73f3 # v1.56.0
       env:
         REVIEWDOG_GITHUB_API_TOKEN: ${{ inputs.github-token }}
         GITHUB_TOKEN: ${{ inputs.github-token }}
