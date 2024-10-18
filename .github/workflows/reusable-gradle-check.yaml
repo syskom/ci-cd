@@ -65,7 +65,7 @@ jobs:
 
       - name: Execute Gradle 'check' task
         run: |
-          ./gradlew check --info
+          ./gradlew check --continue --info
 
       - name: Execute Gradle 'sonar' task
         if: ${{ inputs.run-sonar-scan }}
