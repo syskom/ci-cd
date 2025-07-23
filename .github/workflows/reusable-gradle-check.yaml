@@ -19,7 +19,7 @@ on:
       java-version:
         description: Which Java version to use – https://github.com/actions/setup-java#supported-version-syntax.
         required: false
-        default: 21
+        default: 24
         type: string
       run-sonar-scan:
         description: Should run SonarCloud scan.
