@@ -194,7 +194,7 @@ Workflow that runs Gradle `check` task.
 |--------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|---------|---------|
 | add-gradle-job-summary-as-pr-comment | Add Gradle Job Summary data as a Pull Request comment – https://github.com/gradle/actions/blob/main/docs/setup-gradle.md#adding-job-summary-as-a-pull-request-comment. | false    | never   | string  |
 | java-distribution                    | Which Java distribution to use – https://github.com/actions/setup-java#supported-distributions.                                                                        | false    | temurin | string  |
-| java-version                         | Which Java version to use – https://github.com/actions/setup-java#supported-version-syntax.                                                                            | false    | 21      | string  |
+| java-version                         | Which Java version to use – https://github.com/actions/setup-java#supported-version-syntax.                                                                            | false    | 24      | string  |
 | run-sonar-scan                       | Should run [SonarCloud](https://sonarcloud.io) scan.                                                                                                                   | false    | false   | boolean |
 | sonar-timeout-seconds                | The number of seconds that the build should wait for a report to be processed. The default is 300 seconds.                                                             | false    | 300     | number  |
 
@@ -226,7 +226,7 @@ Workflow that performs [CodeQL][codeql-url] analysis on code compiled by Gradle.
 | Id                | Description                                                                                     | Required | Default | Type   |
 |-------------------|-------------------------------------------------------------------------------------------------|----------|---------|--------|
 | java-distribution | Which Java distribution to use – https://github.com/actions/setup-java#supported-distributions. | false    | temurin | string |
-| java-version      | Which Java version to use – https://github.com/actions/setup-java#supported-version-syntax.     | false    | 21      | string |
+| java-version      | Which Java version to use – https://github.com/actions/setup-java#supported-version-syntax.     | false    | 24      | string |
 
 #### Output parameters
 
