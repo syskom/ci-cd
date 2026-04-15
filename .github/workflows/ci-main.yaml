@@ -11,7 +11,7 @@ on:
 jobs:
   lint-repository-files:
     name: Lint all files
-    uses: syskom/ci-cd/.github/workflows/reusable-lint-files.yaml@main
+    uses: syskom/ci-cd/.github/workflows/reusable-lint-files.yaml@a3b38682f5617dcc48cea9f3aa0186d0fe9ca509 # main
     permissions:
       checks: write
       contents: read
