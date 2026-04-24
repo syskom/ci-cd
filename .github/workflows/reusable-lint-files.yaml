@@ -100,14 +100,14 @@ jobs:
     name: Run EditorConfig Action
     runs-on: ubuntu-latest
     steps:
-      - uses: syskom/ci-cd/.github/actions/editorconfig-lint@main
+      - uses: syskom/ci-cd/.github/actions/editorconfig-lint@bee0f35d3ec93098e0cc5d5a5f1e10cf72b07173 # main
 
   lint-github-actions-job:
     if: inputs.lint-github-actions
     name: Lint GitHub Actions YAML files
     runs-on: ubuntu-latest
     steps:
-      - uses: syskom/ci-cd/.github/actions/github-actions-lint@main
+      - uses: syskom/ci-cd/.github/actions/github-actions-lint@bee0f35d3ec93098e0cc5d5a5f1e10cf72b07173 # main
         with:
           file: ${{ inputs.lint-github-actions-file }}
           schema: ${{ inputs.lint-github-actions-schema }}
@@ -117,7 +117,7 @@ jobs:
     name: Lint GitHub Workflows YAML files
     runs-on: ubuntu-latest
     steps:
-      - uses: syskom/ci-cd/.github/actions/github-workflows-lint@main
+      - uses: syskom/ci-cd/.github/actions/github-workflows-lint@bee0f35d3ec93098e0cc5d5a5f1e10cf72b07173 # main
         with:
           filter-mode: ${{ inputs.lint-github-workflows-filter-mode }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -128,7 +128,7 @@ jobs:
     name: Lint Renovate Config file
     runs-on: ubuntu-latest
     steps:
-      - uses: syskom/ci-cd/.github/actions/renovate-config-lint@main
+      - uses: syskom/ci-cd/.github/actions/renovate-config-lint@bee0f35d3ec93098e0cc5d5a5f1e10cf72b07173 # main
         with:
           config-file-path: ${{ inputs.lint-renovate-config-file-path }}
 
@@ -137,7 +137,7 @@ jobs:
     name: Lint YAML files
     runs-on: ubuntu-latest
     steps:
-      - uses: syskom/ci-cd/.github/actions/yaml-lint@main
+      - uses: syskom/ci-cd/.github/actions/yaml-lint@bee0f35d3ec93098e0cc5d5a5f1e10cf72b07173 # main
         with:
           filter-mode: ${{ inputs.lint-yaml-files-filter-mode }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
