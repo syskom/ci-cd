@@ -20,7 +20,7 @@ runs:
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
     - name: Lint GitHub Actions YAML files
-      uses: cardinalby/schema-validator-action@2166123eb256fa40baef7e22ab1379708425efc7 # v3.1.1
+      uses: cardinalby/schema-validator-action@95ce895b6846cc7d931785fcaa46c84816753612 # 3.1.2
       with:
         file: ${{ inputs.file }}
         fileParser: yaml
